@@ -6,16 +6,16 @@
   "author": "django",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sixdjango/django-react-component"
+    "url": "https://github.com/yc-technology/component"
   },
-  "main": "./dist/django-react-component.umd.js",
-  "module": "./dist/django-react-component.es.js",
+  "main": "./dist/component.umd.js",
+  "module": "./dist/component.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/django-react-component.es.js",
-      "require": "./dist/django-react-component.umd.js"
+      "import": "./dist/component.es.js",
+      "require": "./dist/component.umd.js"
     },
     "./dist/style.css": "./dist/style.css"
   },

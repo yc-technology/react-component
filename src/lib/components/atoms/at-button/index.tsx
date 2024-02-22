@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from 'react'
 
 import { cva } from 'class-variance-authority'
-import { clsxm } from '../../../utils'
+import { clsxm } from '@yc-tech/shared'
 
 const variants = cva('', {
   variants: {

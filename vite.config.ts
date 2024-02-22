@@ -40,6 +40,15 @@ const app = async (): Promise<UserConfigExport> => {
           'class-variance-authority',
           'tailwind-merge',
           'clsx',
+          '@yc-tech/shared',
+          '@iconify/react',
+          'lodash-es',
+          'rc-image',
+          '@hookform/resolvers/zod',
+          '@radix-ui/react-slot',
+          '@radix-ui/react-icons',
+          '@radix-ui/react-dialog',
+          '@radix-ui/react-label',
         ],
         output: {
           globals: {

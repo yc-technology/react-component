@@ -1,21 +1,21 @@
 {
   "name": "@yc-tech/react-component",
   "private": false,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "packageManager": "pnpm@8.15.0",
   "author": "django",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yc-technology/component"
+    "url": "https://github.com/yc-technology/react-component"
   },
-  "main": "./dist/component.umd.js",
-  "module": "./dist/component.es.js",
-  "types": "./dist/index.d.ts",
+  "main": "dist/react-component.umd.js",
+  "module": "dist/react-component.es.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/component.es.js",
-      "require": "./dist/component.umd.js"
+      "import": "./dist/react-component.es.js",
+      "require": "./dist/react-component.umd.js"
     },
     "./dist/style.css": "./dist/style.css"
   },
@@ -31,8 +31,7 @@
     "prettier": "prettier --write \"src/**/*.{ts,tsx,js,mdx}\"",
     "test": "vitest",
     "test:cov": "vitest run --coverage",
-    "prepare": "husky install",
-    "prepack": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\""
+    "prepack": "json -f package.json -I -e \"delete this.devDependencies;\""
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -43,6 +42,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@yc-tech/shared": "^0.1.1",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.22",
     "lodash-es": "^4.17.21",

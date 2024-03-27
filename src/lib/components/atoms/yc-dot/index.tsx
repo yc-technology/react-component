@@ -1,6 +1,8 @@
+'use client'
+
 import { clsxm } from '@yc-tech/shared'
 
-type DotProps = {
+type YcDotProps = {
   x?: number
   y?: number
   value?: string | number
@@ -8,7 +10,7 @@ type DotProps = {
   show?: boolean
   wrapperClassName?: string
 } & React.HTMLAttributes<HTMLDivElement>
-export default function YcDot({ value, children, dot, y, x, show, className, wrapperClassName }: DotProps) {
+export default function YcDot({ value, children, dot, y, x, show, className, wrapperClassName }: YcDotProps) {
   if (show === false) return children
   return (
     <div className={clsxm('relative')}>

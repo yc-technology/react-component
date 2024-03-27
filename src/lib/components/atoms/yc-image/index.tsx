@@ -1,3 +1,5 @@
+'use client'
+
 import RcImage, { ImagePreviewType as RcImagePreviewType, ImageProps as RcImageProps } from 'rc-image'
 import React, { useMemo } from 'react'
 import './index.less'
@@ -32,7 +34,7 @@ export type ImagePreviewType = RcImagePreviewType
 interface CompoundedComponent<P> extends React.FC<P> {
   PreviewGroup: typeof PreviewGroup
 }
-export const Image: CompoundedComponent<ImageProps> = ({ preview, ...rest }) => {
+export const YcImage: CompoundedComponent<ImageProps> = ({ preview, ...rest }) => {
   const previewOptions = useMemo(() => {
     if (typeof preview === 'boolean') {
       if (!preview) return false
@@ -50,6 +52,6 @@ export const Image: CompoundedComponent<ImageProps> = ({ preview, ...rest }) => 
   return <RcImage preview={previewOptions} {...rest} />
 }
 
-Image.PreviewGroup = PreviewGroup
+YcImage.PreviewGroup = PreviewGroup
 
-export default Image
+export default YcImage

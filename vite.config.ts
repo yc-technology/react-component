@@ -3,10 +3,11 @@ import path from 'node:path'
 import { defineConfig } from 'vitest/config'
 import dts from 'vite-plugin-dts'
 import tailwindcss from 'tailwindcss'
-import { UserConfigExport } from 'vite'
+import { ConfigEnv, UserConfigExport } from 'vite'
 import { name } from './package.json'
 
-const app = async (): Promise<UserConfigExport> => {
+const app = async ({ mode }: ConfigEnv): Promise<UserConfigExport> => {
+  const isDev = mode === 'development'
   /**
    * Removes everything before the last
    */
@@ -16,20 +17,21 @@ const app = async (): Promise<UserConfigExport> => {
     plugins: [
       react(),
       dts({
-        insertTypesEntry: true,
-      }),
+        insertTypesEntry: true
+      })
     ],
     css: {
       postcss: {
-        plugins: [tailwindcss],
-      },
+        plugins: [tailwindcss]
+      }
     },
     build: {
+      watch: isDev ? {} : undefined,
       lib: {
         entry: path.resolve(__dirname, 'src/lib/index.ts'),
         name: formattedName,
         formats: ['es', 'umd'],
-        fileName: (format) => `${formattedName}.${format}.js`,
+        fileName: (format) => `${formattedName}.${format}.js`
       },
       rollupOptions: {
         external: [
@@ -52,7 +54,7 @@ const app = async (): Promise<UserConfigExport> => {
           '@radix-ui/react-slot',
           '@radix-ui/react-icons',
           '@radix-ui/react-dialog',
-          '@radix-ui/react-label',
+          '@radix-ui/react-label'
         ],
         output: {
           globals: {
@@ -62,15 +64,15 @@ const app = async (): Promise<UserConfigExport> => {
             'react-dom': 'ReactDOM',
             'tailwind-merge': 'tailwind-merge',
             clsx: 'clsx',
-            tailwindcss: 'tailwindcss',
-          },
-        },
-      },
+            tailwindcss: 'tailwindcss'
+          }
+        }
+      }
     },
     test: {
       globals: true,
-      environment: 'jsdom',
-    },
+      environment: 'jsdom'
+    }
   })
 }
 // https://vitejs.dev/config/

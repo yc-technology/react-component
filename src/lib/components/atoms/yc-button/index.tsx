@@ -16,12 +16,14 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
+        default: 'bg-primary text-white shadow hover:bg-primary/90',
         destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
-        outline: 'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
-        secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 border-neutral-100 border',
+        outline:
+          'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
+        secondary:
+          'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 border-neutral-100 border',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-primary underline-offset-4 hover:underline',
+        link: 'text-primary underline-offset-4 hover:underline'
       },
       size: {
         default: 'h-9 px-4 py-2',
@@ -29,14 +31,14 @@ export const buttonVariants = cva(
         lg: 'h-10 rounded px-8',
         icon: 'h-8 w-8',
         tiny: 'h-6 w-6 rounded',
-        none: '',
-      },
+        none: ''
+      }
     },
     defaultVariants: {
       variant: 'default',
-      size: 'default',
-    },
-  },
+      size: 'default'
+    }
+  }
 )
 
 export interface ButtonProps
@@ -63,7 +65,7 @@ const DButton = forwardRef<HTMLButtonElement, ButtonProps>(
       loading: outerLoading,
       ...props
     },
-    ref,
+    ref
   ) => {
     const Comp = asChild ? Slot : 'button'
     const [innerLoading, setInnerLoading] = useState(false)
@@ -84,17 +86,16 @@ const DButton = forwardRef<HTMLButtonElement, ButtonProps>(
         <Comp
           disabled={loading}
           className={clsxm(buttonVariants({ variant, size }), className, {
-            'animate-pulse': loading,
+            'animate-pulse': loading
           })}
           ref={ref}
           onClick={packOnClick}
-          {...props}
-        >
+          {...props}>
           {children}
         </Comp>
       </ButtonContext.Provider>
     )
-  },
+  }
 )
 
 type ButtonIconProps = {
@@ -107,7 +108,13 @@ const YcButtonIcon = ({ asChild, icon, className, ...rest }: ButtonIconProps) =>
 
   if (asChild) {
     if (loading) {
-      return <YcIcon icon="mingcute:loading-line" {...rest} className={clsxm('animate-spin', className)} />
+      return (
+        <YcIcon
+          icon="mingcute:loading-line"
+          {...rest}
+          className={clsxm('animate-spin', className)}
+        />
+      )
     }
     return <Slot {...rest} className={clsxm(className)} />
   }

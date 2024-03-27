@@ -15,13 +15,13 @@ import {
   SubmitErrorHandler,
   SubmitHandler,
   UseFormReturn,
-  useFormContext,
+  useFormContext
 } from 'react-hook-form'
 import YcLabel from '../yc-label'
 
 type YcFormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 > = {
   name: TName
 }
@@ -45,7 +45,7 @@ const useFormField = () => {
     formItemId: `${id}-form-item`,
     formDescriptionId: `${id}-form-item-description`,
     formMessageId: `${id}-form-item-message`,
-    ...fieldState,
+    ...fieldState
   } as Partial<{
     invalid: boolean
     isDirty: boolean
@@ -74,7 +74,7 @@ const YcFormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
         <div ref={ref} className={clsxm('space-y-2', className)} {...props} />
       </YcFormItemContext.Provider>
     )
-  },
+  }
 )
 YcFormItem.displayName = 'FormItem'
 
@@ -84,64 +84,73 @@ const YcFormLabel = React.forwardRef<
 >(({ className, ...props }, ref) => {
   const { error, formItemId } = useFormField()
 
-  return <YcLabel ref={ref} className={clsxm(error && 'text-destructive', className)} htmlFor={formItemId} {...props} />
+  return (
+    <YcLabel
+      ref={ref}
+      className={clsxm(error && 'text-destructive', className)}
+      htmlFor={formItemId}
+      {...props}
+    />
+  )
 })
 YcFormLabel.displayName = 'FormLabel'
 
-const YcFormControl = React.forwardRef<React.ElementRef<typeof Slot>, React.ComponentPropsWithoutRef<typeof Slot>>(
-  ({ ...props }, ref) => {
-    const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
+const YcFormControl = React.forwardRef<
+  React.ElementRef<typeof Slot>,
+  React.ComponentPropsWithoutRef<typeof Slot>
+>(({ ...props }, ref) => {
+  const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
 
-    return (
-      <Slot
-        ref={ref}
-        id={formItemId}
-        aria-describedby={!error ? `${formDescriptionId}` : `${formDescriptionId} ${formMessageId}`}
-        aria-invalid={!!error}
-        {...props}
-      />
-    )
-  },
-)
+  return (
+    <Slot
+      ref={ref}
+      id={formItemId}
+      aria-describedby={!error ? `${formDescriptionId}` : `${formDescriptionId} ${formMessageId}`}
+      aria-invalid={!!error}
+      {...props}
+    />
+  )
+})
 YcFormControl.displayName = 'YcFormControl'
 
-const YcFormDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
-  ({ className, ...props }, ref) => {
-    const { formDescriptionId } = useFormField()
+const YcFormDescription = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => {
+  const { formDescriptionId } = useFormField()
 
-    return (
-      <p
-        ref={ref}
-        id={formDescriptionId}
-        className={clsxm('text-[0.8rem] text-muted-foreground', className)}
-        {...props}
-      />
-    )
-  },
-)
+  return (
+    <p
+      ref={ref}
+      id={formDescriptionId}
+      className={clsxm('text-[0.8rem] text-muted-foreground', className)}
+      {...props}
+    />
+  )
+})
 YcFormDescription.displayName = 'FormDescription'
 
-const YcFormMessage = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
-  ({ className, children, ...props }, ref) => {
-    const { error, formMessageId } = useFormField()
-    const body = error ? String(error?.message) : children
+const YcFormMessage = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, children, ...props }, ref) => {
+  const { error, formMessageId } = useFormField()
+  const body = error ? String(error?.message) : children
 
-    if (!body) {
-      return null
-    }
+  if (!body) {
+    return null
+  }
 
-    return (
-      <p
-        ref={ref}
-        id={formMessageId}
-        className={clsxm('text-[0.8rem] font-medium text-destructive', className)}
-        {...props}
-      >
-        {body}
-      </p>
-    )
-  },
-)
+  return (
+    <p
+      ref={ref}
+      id={formMessageId}
+      className={clsxm('text-[0.8rem] font-medium text-destructive', className)}
+      {...props}>
+      {body}
+    </p>
+  )
+})
 YcFormMessage.displayName = 'FormMessage'
 
 // Form Field
@@ -154,7 +163,7 @@ const FormFieldContext = React.createContext<YcFormFieldContextValue>({} as YcFo
 
 const YcFormField = <
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >({
   description,
   children,
@@ -184,30 +193,32 @@ const YcFormField = <
 type YcFormProps<
   TFieldValues extends FieldValues,
   TContext = any,
-  TTransformedValues extends FieldValues = TFieldValues,
+  TTransformedValues extends FieldValues = TFieldValues
 > = {
   form: UseFormReturn<TFieldValues, TContext, TTransformedValues>
   onValid?: TTransformedValues extends undefined
     ? SubmitHandler<TFieldValues>
     : TTransformedValues extends FieldValues
-    ? SubmitHandler<TTransformedValues>
-    : never
+      ? SubmitHandler<TTransformedValues>
+      : never
   onInvalid?: SubmitErrorHandler<TFieldValues>
 } & Omit<React.HTMLAttributes<HTMLFormElement>, 'onSubmit'>
 
 const YcForm = <
   TFieldValues extends FieldValues,
   TContext = any,
-  TTransformedValues extends FieldValues = TFieldValues,
+  TTransformedValues extends FieldValues = TFieldValues
 >({
   form,
   children,
   className,
-  onValid,
+  onValid
 }: YcFormProps<TFieldValues, TContext, TTransformedValues>) => {
   return (
     <FormProvider {...form}>
-      <form onSubmit={onValid ? form.handleSubmit(onValid) : undefined} className={clsxm(className)}>
+      <form
+        onSubmit={onValid ? form.handleSubmit(onValid) : undefined}
+        className={clsxm(className)}>
         {children}
       </form>
     </FormProvider>
@@ -218,10 +229,10 @@ export {
   YcForm,
   YcFormControl,
   YcFormDescription,
-  YcFormField as FormField,
+  YcFormField,
   YcFormItem,
   YcFormLabel,
   YcFormMessage,
   FormProvider as YcFormProvider,
-  useFormField,
+  useFormField
 }

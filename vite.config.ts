@@ -57,6 +57,7 @@ const app = async ({ mode }: ConfigEnv): Promise<UserConfigExport> => {
           '@radix-ui/react-label'
         ],
         output: {
+          banner: `'use client';`,
           globals: {
             react: 'React',
             'class-variance-authority': 'class-variance-authority',

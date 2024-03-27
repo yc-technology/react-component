@@ -1,7 +1,7 @@
 import { FieldValues, UseFormProps, UseFormReturn, useForm as useRForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z, ZodTypeDef } from '@yc-tech/shared'
-export function useForm<
+export function useYcForm<
   TFieldValues extends FieldValues = FieldValues,
   TContext = any,
   TTransformedValues extends FieldValues = TFieldValues,

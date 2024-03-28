@@ -12,7 +12,7 @@ interface ButtonContextValue {
 const ButtonContext = createContext<ButtonContextValue>({ loading: false })
 
 export const buttonVariants = cva(
-  'inline-flex transition-colors bg-transparent items-center justify-center whitespace-nowrap rounded text-sm font-medium focus-visible:outline-none disabled:pointer-events-none disabled:bg-neutral-300 disabled:text-white',
+  'inline-flex transition-colors bg-transparent items-center justify-center whitespace-nowrap rounded text-sm font-medium focus-visible:outline-none  disabled:bg-neutral-300 disabled:text-white',
   {
     variants: {
       variant: {
@@ -86,7 +86,7 @@ const DButton = forwardRef<HTMLButtonElement, ButtonProps>(
         <Comp
           disabled={loading}
           className={clsxm(buttonVariants({ variant, size }), className, {
-            'animate-pulse': loading
+            'animate-pulse cursor-progress': loading
           })}
           ref={ref}
           onClick={packOnClick}

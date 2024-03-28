@@ -49,6 +49,8 @@ const app = async ({ mode }: ConfigEnv): Promise<UserConfigExport> => {
           'framer-motion',
           '@hookform/resolvers/zod',
           'rc-select',
+          'rc-table',
+          'rc-animate',
           'sonner',
           '@radix-ui/react-tooltip',
           '@radix-ui/react-slot',

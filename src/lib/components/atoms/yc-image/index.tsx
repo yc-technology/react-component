@@ -1,23 +1,31 @@
 'use client'
 
-import RcImage, { ImagePreviewType as RcImagePreviewType, ImageProps as RcImageProps } from 'rc-image'
+import RcImage, {
+  ImagePreviewType as RcImagePreviewType,
+  ImageProps as RcImageProps
+} from 'rc-image'
 import React, { useMemo } from 'react'
 import './index.less'
-import { ChevronLeftIcon, ChevronRightIcon, Cross1Icon, RotateCounterClockwiseIcon } from '@radix-ui/react-icons'
-import Icon from '../yc-icon'
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  Cross1Icon,
+  RotateCounterClockwiseIcon
+} from '@radix-ui/react-icons'
+import { YcIcon } from '../yc-icon'
 
 type PreviewGroupProps = typeof RcImage.PreviewGroup
 
 const defaultIcons = {
   rotateLeft: <RotateCounterClockwiseIcon />,
   rotateRight: <RotateCounterClockwiseIcon className=" transition scale-x-[-1]" />,
-  zoomIn: <Icon icon="mingcute:zoom-in-line" />,
-  zoomOut: <Icon icon="mingcute:zoom-out-line" />,
+  zoomIn: <YcIcon icon="mingcute:zoom-in-line" />,
+  zoomOut: <YcIcon icon="mingcute:zoom-out-line" />,
   close: <Cross1Icon />,
   left: <ChevronLeftIcon />,
   right: <ChevronRightIcon />,
-  flipX: <Icon icon="mingcute:rotate-x-line" />,
-  flipY: <Icon icon="mingcute:rotate-y-line" />,
+  flipX: <YcIcon icon="mingcute:rotate-x-line" />,
+  flipY: <YcIcon icon="mingcute:rotate-y-line" />
 }
 
 const PreviewGroup = ({ children, ...rest }: React.ComponentPropsWithRef<PreviewGroupProps>) => {
@@ -39,13 +47,13 @@ export const YcImage: CompoundedComponent<ImageProps> = ({ preview, ...rest }) =
     if (typeof preview === 'boolean') {
       if (!preview) return false
       return {
-        icons: defaultIcons,
+        icons: defaultIcons
       }
     }
 
     return {
       ...preview,
-      icons: defaultIcons,
+      icons: defaultIcons
     }
   }, [preview])
 

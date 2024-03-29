@@ -4,7 +4,7 @@ import { Slot } from '@radix-ui/react-slot'
 import { VariantProps, cva } from 'class-variance-authority'
 import React, { createContext, forwardRef, useMemo, useState } from 'react'
 import { clsxm } from '@yc-tech/shared'
-import YcIcon from '../yc-icon'
+import { YcIcon } from '../yc-icon'
 interface ButtonContextValue {
   loading: boolean
 }
@@ -12,7 +12,7 @@ interface ButtonContextValue {
 const ButtonContext = createContext<ButtonContextValue>({ loading: false })
 
 export const buttonVariants = cva(
-  'inline-flex transition-colors bg-transparent items-center justify-center whitespace-nowrap rounded text-sm font-medium focus-visible:outline-none  disabled:bg-neutral-300 disabled:text-white',
+  'inline-flex transition-colors bg-transparent items-center justify-center whitespace-nowrap rounded text-sm font-medium focus-visible:outline-none disabled:bg-neutral-100 disabled:text-white',
   {
     variants: {
       variant: {
@@ -23,13 +23,14 @@ export const buttonVariants = cva(
         secondary:
           'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 border-neutral-100 border',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-primary underline-offset-4 hover:underline'
+        link: 'text-primary underline-offset-4 hover:underline',
+        icon: 'hover:!bg-neutral-50 hover:text-accent-foreground'
       },
       size: {
         default: 'h-9 px-4 py-2',
         sm: 'h-8 rounded px-3 text-xs',
         lg: 'h-10 rounded px-8',
-        icon: 'h-8 w-8',
+        icon: 'min-h-6 min-w-6 p-1',
         tiny: 'h-6 w-6 rounded',
         none: ''
       }

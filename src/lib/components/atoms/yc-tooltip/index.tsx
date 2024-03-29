@@ -39,18 +39,23 @@ const YcTooltip = React.forwardRef<
 const YcToolTipButton = React.forwardRef<
   React.ElementRef<typeof YcButton>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Trigger>
->(({ onPointerLeave, onPointerMove, onPointerEnter, onPointerDown, onClick, ...rest }: ButtonProps, ref) => {
-  return (
-    <YcButton
-      ref={ref}
-      onMouseEnter={onPointerEnter}
-      onMouseMove={onPointerMove}
-      onMouseLeave={onPointerLeave}
-      onMouseDown={onPointerDown}
-      {...rest}
-    />
-  )
-})
+>(
+  (
+    { onPointerLeave, onPointerMove, onPointerEnter, onPointerDown, onClick, ...rest }: ButtonProps,
+    ref
+  ) => {
+    return (
+      <YcButton
+        ref={ref}
+        onMouseEnter={onPointerEnter}
+        onMouseMove={onPointerMove}
+        onMouseLeave={onPointerLeave}
+        onMouseDown={onPointerDown}
+        {...rest}
+      />
+    )
+  }
+)
 
 const YcTooltipTrigger = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Trigger>,
@@ -62,21 +67,23 @@ const YcTooltipTrigger = React.forwardRef<
 const YcTooltipContent = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
->(({ className, sideOffset = 4, ...props }, ref) =>
-  // 渲染到 body 上
-  createPortal(
-    <TooltipPrimitive.Content
-      ref={ref}
-      sideOffset={sideOffset}
-      className={clsxm(
-        'max-w-[360px] z-[50] overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-        className,
-      )}
-      {...props}
-    />,
-    document.body,
-  ),
-)
+>(({ className, sideOffset = 4, ...props }, ref) => {
+  if (typeof window !== 'undefined') {
+    // 渲染到 body 上
+    return createPortal(
+      <TooltipPrimitive.Content
+        ref={ref}
+        sideOffset={sideOffset}
+        className={clsxm(
+          'max-w-[360px] z-[50] overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+          className
+        )}
+        {...props}
+      />,
+      window?.document.body
+    )
+  }
+})
 YcTooltipContent.displayName = TooltipPrimitive.Content.displayName
 
 export { YcTooltip, YcTooltipTrigger, YcTooltipContent, YcTooltipProvider }

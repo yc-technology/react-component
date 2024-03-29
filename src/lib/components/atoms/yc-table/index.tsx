@@ -70,7 +70,7 @@ function YcTableEmpty() {
   )
 }
 
-function YcTable<T extends Record<string, any>>(
+function YcTableInner<T extends Record<string, any>>(
   { animate, headerBackground, contentBorderColor, contentBorderWidth, ...rest }: YcTableProps<T>,
   ref: React.Ref<Reference>
 ) {
@@ -90,8 +90,10 @@ function YcTable<T extends Record<string, any>>(
   )
 }
 
-type YcTableType = typeof YcTable
-export default React.forwardRef(YcTable) as YcTableType
+type YcTableType = typeof YcTableInner
+const YcTable = React.forwardRef(YcTableInner) as YcTableType
 
 type YcColumnType<T> = RcColumnType<T>
+
+export { YcTable }
 export type { YcColumnType }

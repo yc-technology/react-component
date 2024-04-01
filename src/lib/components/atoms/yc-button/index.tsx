@@ -12,7 +12,7 @@ interface ButtonContextValue {
 const ButtonContext = createContext<ButtonContextValue>({ loading: false })
 
 export const buttonVariants = cva(
-  'inline-flex transition-colors bg-transparent items-center justify-center whitespace-nowrap rounded text-sm font-medium focus-visible:outline-none disabled:bg-neutral-100 disabled:text-white',
+  'inline-flex transition-colors bg-transparent items-center justify-center whitespace-nowrap rounded text-sm font-medium focus-visible:outline-none disabled:bg-neutral-300 disabled:text-white',
   {
     variants: {
       variant: {
@@ -58,6 +58,7 @@ const DButton = forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       variant,
       size,
+      autoSync,
       asChild = false,
       onClick,
       stopPropagation: stop,
@@ -77,7 +78,18 @@ const DButton = forwardRef<HTMLButtonElement, ButtonProps>(
 
     let packOnClick = onClick
     packOnClick = (e) => {
-      onClick?.(e)
+      if (loading) return
+      if (autoSync) {
+        if (onClick) {
+          const res: Promise<any> | any = onClick(e)
+          if (res instanceof Promise) {
+            setInnerLoading(true)
+            res.finally(() => setInnerLoading(false))
+          }
+        }
+      } else {
+        onClick?.(e)
+      }
       if (stop) e.stopPropagation()
       if (prevent) e.preventDefault()
     }

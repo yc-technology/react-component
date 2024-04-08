@@ -105,7 +105,7 @@ const YcInfinityScroll = React.forwardRef((props: YcInfinityScrollProps = {}, re
             renderLoading()
           ) : (
             <div className="flex justify-center items-center w-full ">
-              <YcSpinner />
+              <YcSpinner className="w-6 h-6" />
             </div>
           ))}
         {finished &&

@@ -14,6 +14,14 @@ const app = async ({ mode }: ConfigEnv): Promise<UserConfigExport> => {
   const formattedName = name.match(/[^/]+$/)?.[0] ?? name
 
   return defineConfig({
+    resolve: {
+      alias: [
+        {
+          find: /^~\//,
+          replacement: `${path.resolve(__dirname, 'src')}/`
+        }
+      ]
+    },
     plugins: [
       react(),
       dts({
@@ -51,12 +59,16 @@ const app = async ({ mode }: ConfigEnv): Promise<UserConfigExport> => {
           'rc-select',
           'rc-table',
           'rc-animate',
+          'rc-textarea',
+          'rc-input',
           'sonner',
           '@radix-ui/react-tooltip',
           '@radix-ui/react-slot',
           '@radix-ui/react-icons',
           '@radix-ui/react-dialog',
-          '@radix-ui/react-label'
+          '@radix-ui/react-label',
+          '@floating-ui/react',
+          'ahooks'
         ],
         output: {
           banner: `'use client';`,

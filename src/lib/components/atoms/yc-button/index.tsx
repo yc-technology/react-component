@@ -42,7 +42,7 @@ export const buttonVariants = cva(
   }
 )
 
-export interface ButtonProps
+export interface YcButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
@@ -52,7 +52,7 @@ export interface ButtonProps
   loading?: boolean
 }
 
-const DButton = forwardRef<HTMLButtonElement, ButtonProps>(
+const DButton = forwardRef<HTMLButtonElement, YcButtonProps>(
   (
     {
       className,
@@ -111,12 +111,12 @@ const DButton = forwardRef<HTMLButtonElement, ButtonProps>(
   }
 )
 
-type ButtonIconProps = {
+type YcButtonIconProps = {
   asChild?: boolean
 } & React.ComponentProps<typeof YcIcon> &
   React.ComponentProps<typeof Slot>
 
-const YcButtonIcon = ({ asChild, icon, className, ...rest }: ButtonIconProps) => {
+const YcButtonIcon = ({ asChild, icon, className, ...rest }: YcButtonIconProps) => {
   const { loading } = React.useContext(ButtonContext)
 
   if (asChild) {

@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import * as TooltipPrimitive from '@radix-ui/react-tooltip'
-import { YcButton, ButtonProps } from '../yc-button'
+import { YcButton, YcButtonProps } from '../yc-button'
 import { createPortal } from 'react-dom'
 import { clsxm } from '@yc-tech/shared'
 
@@ -41,7 +41,14 @@ const YcToolTipButton = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Trigger>
 >(
   (
-    { onPointerLeave, onPointerMove, onPointerEnter, onPointerDown, onClick, ...rest }: ButtonProps,
+    {
+      onPointerLeave,
+      onPointerMove,
+      onPointerEnter,
+      onPointerDown,
+      onClick,
+      ...rest
+    }: YcButtonProps,
     ref
   ) => {
     return (

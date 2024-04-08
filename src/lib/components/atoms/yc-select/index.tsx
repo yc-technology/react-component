@@ -5,17 +5,32 @@ import { BaseOptionType, DefaultOptionType, SelectProps } from 'rc-select/lib/Se
 import './index.less'
 import { ArchiveIcon, ChevronDownIcon } from '@radix-ui/react-icons'
 import { YcIcon } from '../yc-icon'
+import { forwardRef } from 'react'
+import { YcSpinner } from '../yc-spinner'
 
-export function YcSelect<
+type YcSelectState = {
+  loading?: boolean
+  open?: boolean
+  focused?: boolean
+  showSearch?: boolean
+  searchValue: string
+}
+
+type YcSelectProps<
   ValueType = any,
   OptionType extends BaseOptionType | DefaultOptionType = DefaultOptionType
->({
-  ...rest
-}: SelectProps<ValueType, OptionType> & {
+> = SelectProps<ValueType, OptionType> & {
   children?: React.ReactNode
-} & React.RefAttributes<BaseSelectRef>) {
-  const SuffixIcon = () => <ChevronDownIcon className="w-5 h-5" />
-  const CloseIcon = () => <YcIcon icon="mingcute:close-circle-fill" className="w-5 h-5 bg-white" />
+} & React.RefAttributes<BaseSelectRef>
+
+export const YcSelect = forwardRef<BaseSelectRef, YcSelectProps>(function ({ ...rest }, ref) {
+  const SuffixIcon = ({ loading }: YcSelectState) => {
+    if (loading) {
+      return <YcSpinner className="w-5 h-5" />
+    }
+    return <ChevronDownIcon className="w-5 h-5" />
+  }
+  const CloseIcon = () => <YcIcon icon="mingcute:close-line" className="w-3.5 h-3.5 " />
   const EmptyNode = () => (
     <div className="p-4 w-full h-full flex flex-col items-center justify-center">
       <ArchiveIcon className="w-5 h-5 text-neutral-400 mx-auto" />
@@ -25,9 +40,11 @@ export function YcSelect<
   return (
     <RcSelect
       // allowClear={{ clearIcon: <CloseIcon /> }}
+      ref={ref}
       placeholder="Select an option"
       style={{ width: '100%' }}
       animation="slide-up"
+      removeIcon={<CloseIcon />}
       // showSearch
       dropdownMatchSelectWidth={false}
       dropdownStyle={{
@@ -38,4 +55,4 @@ export function YcSelect<
       suffixIcon={SuffixIcon}
       {...rest}></RcSelect>
   )
-}
+})

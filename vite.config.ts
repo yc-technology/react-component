@@ -67,6 +67,7 @@ const app = async ({ mode }: ConfigEnv): Promise<UserConfigExport> => {
           '@radix-ui/react-icons',
           '@radix-ui/react-dialog',
           '@radix-ui/react-label',
+          '@radix-ui/react-collapsible',
           '@floating-ui/react',
           'ahooks'
         ],

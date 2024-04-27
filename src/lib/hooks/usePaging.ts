@@ -103,9 +103,9 @@ export function usePaging<T extends any[]>(
   }
 
   useUpdateEffect(() => {
-    if (finished || loading) return
+    if (finished || loading || empty) return
     load()
-  }, [page, finished, errored])
+  }, [page, finished, errored, empty])
 
   useEffect(() => {
     if (options.immediate) load()

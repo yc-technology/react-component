@@ -20,6 +20,9 @@ export interface YcInfinityScrollProps {
   renderItem?: (item: any, index: number) => JSX.Element
   renderLoading?: () => JSX.Element
   renderFinished?: () => JSX.Element
+  finishedText?: string
+  showEmpty?: boolean
+  emptyText?: string
   className?: string
   style?: React.CSSProperties
   children?: React.ReactNode
@@ -71,19 +74,23 @@ const YcInfinityScroll = React.forwardRef((props: YcInfinityScrollProps = {}, re
     pageToken,
     renderLoading,
     renderFinished,
-    immediate
+    immediate,
+    showEmpty,
+    emptyText,
+    finishedText
   } = props
   const { scrollRef } = useScrollToBottom()
 
-  const { dataSource, loading, finished, scrollToBottom, reload } = usePagingScroll(fetchFn, {
-    dataSource: initialDataSource,
-    setDataSource: initialSetDataSource,
-    target: scrollRef,
-    pageSize,
-    pageToken,
-    reverse,
-    immediate
-  })
+  const { dataSource, loading, finished, initialed, empty, scrollToBottom, reload } =
+    usePagingScroll(fetchFn, {
+      dataSource: initialDataSource,
+      setDataSource: initialSetDataSource,
+      target: scrollRef,
+      pageSize,
+      pageToken,
+      reverse,
+      immediate
+    })
 
   useEffect(() => {
     if (props.reverse) scrollToBottom()
@@ -114,9 +121,15 @@ const YcInfinityScroll = React.forwardRef((props: YcInfinityScrollProps = {}, re
             renderFinished()
           ) : (
             <div className="flex justify-center items-center w-full text-neutral-300">
-              {'No more data'}
+              {finishedText || 'No more data'}
             </div>
           ))}
+
+        {empty && showEmpty && (
+          <div className="flex justify-center items-center w-full text-neutral-300">
+            {emptyText || 'No data'}
+          </div>
+        )}
       </div>
     )
   }

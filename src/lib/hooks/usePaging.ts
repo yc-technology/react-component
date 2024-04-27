@@ -115,6 +115,7 @@ export function usePaging<T extends any[]>(
     page,
     pageSize,
     empty,
+    initialed,
     setEmpty,
     setPage,
     setPageSize,

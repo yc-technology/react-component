@@ -120,14 +120,14 @@ const YcInfinityScroll = React.forwardRef((props: YcInfinityScrollProps = {}, re
             renderFinished()
           ) : (
             <div className="flex justify-center items-center w-full text-neutral-300">
-              {finishedText || 'No more data'}
+              {finishedText || 'No more data.'}
             </div>
           )
         ) : (
           empty &&
           showEmpty && (
             <div className="flex justify-center items-center w-full text-neutral-300">
-              {emptyText || 'No data'}
+              {emptyText || 'No data.'}
             </div>
           )
         )}

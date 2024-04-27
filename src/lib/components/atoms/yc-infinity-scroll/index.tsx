@@ -115,20 +115,21 @@ const YcInfinityScroll = React.forwardRef((props: YcInfinityScrollProps = {}, re
               <YcSpinner className="w-6 h-6" />
             </div>
           ))}
-        {finished &&
-          showFinished &&
-          (renderFinished ? (
+        {finished && showFinished ? (
+          renderFinished ? (
             renderFinished()
           ) : (
             <div className="flex justify-center items-center w-full text-neutral-300">
               {finishedText || 'No more data'}
             </div>
-          ))}
-
-        {empty && showEmpty && (
-          <div className="flex justify-center items-center w-full text-neutral-300">
-            {emptyText || 'No data'}
-          </div>
+          )
+        ) : (
+          empty &&
+          showEmpty && (
+            <div className="flex justify-center items-center w-full text-neutral-300">
+              {emptyText || 'No data'}
+            </div>
+          )
         )}
       </div>
     )

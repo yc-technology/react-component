@@ -106,7 +106,7 @@ function YcPopover({
   open,
   onOpenChange,
   delay,
-  clientPoint: clientPointEnabled,
+  clientPoint: clientPointEnabled = false,
   x,
   y,
   ...rest

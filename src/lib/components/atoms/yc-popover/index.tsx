@@ -12,6 +12,7 @@ import {
   offset,
   shift,
   useClick,
+  useClientPoint,
   useDelayGroup,
   useDismiss,
   useFloating,
@@ -41,6 +42,9 @@ type PopoverProps = {
         open: number
         close: number
       }>
+  clientPoint?: boolean
+  x?: number
+  y?: number
 } & Partial<UseFloatingOptions>
 
 type PopoverTriggerProps = {} & YcButtonProps
@@ -102,6 +106,9 @@ function YcPopover({
   open,
   onOpenChange,
   delay,
+  clientPoint: clientPointEnabled,
+  x,
+  y,
   ...rest
 }: PopoverProps) {
   const [innerOpen, setInnerOpen] = useState(false)
@@ -130,12 +137,19 @@ function YcPopover({
   const click = useClick(res.context, { enabled: trigger === 'click' || !trigger })
   const dismiss = useDismiss(res.context)
   const role = useRole(res.context)
+  const clientPoint = useClientPoint(res.context, { enabled: clientPointEnabled, x, y })
   const hover = useHover(res.context, {
     enabled: trigger === 'hover',
     delay: delay ?? groupDelay
   })
 
-  const { getReferenceProps, getFloatingProps } = useInteractions([click, hover, dismiss, role])
+  const { getReferenceProps, getFloatingProps } = useInteractions([
+    click,
+    hover,
+    dismiss,
+    role,
+    clientPoint
+  ])
 
   return (
     <YcPopoverContext.Provider

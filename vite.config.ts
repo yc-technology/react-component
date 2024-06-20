@@ -43,6 +43,7 @@ const app = async ({ mode }: ConfigEnv): Promise<UserConfigExport> => {
       },
       rollupOptions: {
         external: [
+          'antd',
           'react',
           'react/jsx-runtime',
           'react-dom',

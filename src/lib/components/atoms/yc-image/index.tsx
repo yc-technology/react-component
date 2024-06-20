@@ -36,13 +36,13 @@ const PreviewGroup = ({ children, ...rest }: React.ComponentPropsWithRef<Preview
   )
 }
 
-export type ImageProps = RcImageProps
-export type ImagePreviewType = RcImagePreviewType
+export type YcImageProps = RcImageProps
+export type YcImagePreviewType = RcImagePreviewType
 
 interface CompoundedComponent<P> extends React.FC<P> {
   PreviewGroup: typeof PreviewGroup
 }
-export const YcImage: CompoundedComponent<ImageProps> = ({ preview, ...rest }) => {
+export const YcImage: CompoundedComponent<YcImageProps> = ({ preview, ...rest }) => {
   const previewOptions = useMemo(() => {
     if (typeof preview === 'boolean') {
       if (!preview) return false

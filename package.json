@@ -46,6 +46,7 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@yc-tech/shared": "^0.1.4",
     "ahooks": "^3.7.11",
+    "antd": "^5.18.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.1.7",

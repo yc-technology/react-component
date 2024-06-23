@@ -31,7 +31,7 @@ import YcButton, { YcButtonProps } from '../yc-button'
 import './styles.scss'
 
 /** 类型 */
-type PopoverProps = {
+export type YcPopoverProps = {
   children?: React.ReactNode
   trigger?: 'click' | 'hover'
   open?: boolean
@@ -110,7 +110,7 @@ function YcPopover({
   x,
   y,
   ...rest
-}: PopoverProps) {
+}: YcPopoverProps) {
   const [innerOpen, setInnerOpen] = useState(false)
   const arrowRef = useRef(null)
   const id = useId()

@@ -50,6 +50,7 @@ export interface YcButtonProps
   stopPropagation?: boolean
   preventDefault?: boolean
   loading?: boolean
+  showLoading?: boolean
 }
 
 const DButton = forwardRef<HTMLButtonElement, YcButtonProps>(
@@ -65,6 +66,7 @@ const DButton = forwardRef<HTMLButtonElement, YcButtonProps>(
       preventDefault: prevent,
       children,
       loading: outerLoading,
+      showLoading,
       ...props
     },
     ref
@@ -74,7 +76,7 @@ const DButton = forwardRef<HTMLButtonElement, YcButtonProps>(
 
     const loading = outerLoading || innerLoading
 
-    const contextValue = useMemo(() => ({ loading }), [innerLoading, outerLoading])
+    const contextValue = useMemo(() => ({ loading }), [loading])
 
     let packOnClick = onClick
     packOnClick = (e) => {
@@ -104,6 +106,12 @@ const DButton = forwardRef<HTMLButtonElement, YcButtonProps>(
           ref={ref}
           onClick={packOnClick}
           {...props}>
+          {loading && showLoading && (
+            <YcIcon
+              icon="mingcute:loading-line"
+              className={clsxm('animate-spin', 'mr-1 text-base')}
+            />
+          )}
           {children}
         </Comp>
       </ButtonContext.Provider>

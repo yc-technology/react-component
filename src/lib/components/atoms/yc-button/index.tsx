@@ -5,6 +5,7 @@ import { VariantProps, cva } from 'class-variance-authority'
 import React, { createContext, forwardRef, useMemo, useState } from 'react'
 import { clsxm } from '@yc-tech/shared'
 import { YcIcon } from '../yc-icon'
+import { DeepPartial } from 'react-hook-form'
 interface ButtonContextValue {
   loading: boolean
 }
@@ -106,12 +107,6 @@ const DButton = forwardRef<HTMLButtonElement, YcButtonProps>(
           ref={ref}
           onClick={packOnClick}
           {...props}>
-          {loading && showLoading && (
-            <YcIcon
-              icon="mingcute:loading-line"
-              className={clsxm('animate-spin', 'mr-1 text-base')}
-            />
-          )}
           {children}
         </Comp>
       </ButtonContext.Provider>
@@ -124,7 +119,7 @@ type YcButtonIconProps = {
 } & React.ComponentProps<typeof YcIcon> &
   React.ComponentProps<typeof Slot>
 
-const YcButtonIcon = ({ asChild, icon, className, ...rest }: YcButtonIconProps) => {
+const YcButtonIcon = ({ asChild, icon, className, ...rest }: Partial<YcButtonIconProps>) => {
   const { loading } = React.useContext(ButtonContext)
 
   if (asChild) {
@@ -140,9 +135,11 @@ const YcButtonIcon = ({ asChild, icon, className, ...rest }: YcButtonIconProps) 
     return <Slot {...rest} className={clsxm(className)} />
   }
 
+  if (!loading && !icon) return null
+
   return (
     <YcIcon
-      icon={loading ? 'mingcute:loading-line' : icon}
+      icon={loading ? 'mingcute:loading-line' : icon!}
       {...rest}
       className={clsxm({ 'animate-spin': loading }, className)}
     />

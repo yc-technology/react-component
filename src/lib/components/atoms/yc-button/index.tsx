@@ -5,7 +5,7 @@ import { VariantProps, cva } from 'class-variance-authority'
 import React, { createContext, forwardRef, useMemo, useState } from 'react'
 import { clsxm } from '@yc-tech/shared'
 import { YcIcon } from '../yc-icon'
-import { DeepPartial } from 'react-hook-form'
+import { useButton } from '~/lib/hooks/useButton'
 interface ButtonContextValue {
   loading: boolean
 }
@@ -55,47 +55,11 @@ export interface YcButtonProps
 }
 
 const DButton = forwardRef<HTMLButtonElement, YcButtonProps>(
-  (
-    {
-      className,
-      variant,
-      size,
-      autoSync,
-      asChild = false,
-      onClick,
-      stopPropagation: stop,
-      preventDefault: prevent,
-      children,
-      loading: outerLoading,
-      showLoading,
-      ...props
-    },
-    ref
-  ) => {
+  ({ className, variant, size, asChild = false, children, showLoading, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button'
-    const [innerLoading, setInnerLoading] = useState(false)
-
-    const loading = outerLoading || innerLoading
+    const { loading, onClick } = useButton(props)
 
     const contextValue = useMemo(() => ({ loading }), [loading])
-
-    let packOnClick = onClick
-    packOnClick = (e) => {
-      if (loading) return
-      if (autoSync) {
-        if (onClick) {
-          const res: Promise<any> | any = onClick(e)
-          if (res instanceof Promise) {
-            setInnerLoading(true)
-            res.finally(() => setInnerLoading(false))
-          }
-        }
-      } else {
-        onClick?.(e)
-      }
-      if (stop) e.stopPropagation()
-      if (prevent) e.preventDefault()
-    }
 
     return (
       <ButtonContext.Provider value={contextValue}>
@@ -105,7 +69,7 @@ const DButton = forwardRef<HTMLButtonElement, YcButtonProps>(
             'animate-pulse cursor-progress': loading
           })}
           ref={ref}
-          onClick={packOnClick}
+          onClick={onClick}
           {...props}>
           {children}
         </Comp>

@@ -1,47 +1,45 @@
 'use client'
 
 import { Slot } from '@radix-ui/react-slot'
-import { VariantProps, cva } from 'class-variance-authority'
-import React, { createContext, forwardRef, useMemo, useState } from 'react'
 import { clsxm } from '@yc-tech/shared'
-import { YcIcon } from '../yc-icon'
+import { VariantProps, cva } from 'cva'
+import React, { createContext, forwardRef, useMemo } from 'react'
 import { useButton } from '~/lib/hooks/useButton'
+import { YcIcon } from '../yc-icon'
 interface ButtonContextValue {
   loading: boolean
 }
 
 const ButtonContext = createContext<ButtonContextValue>({ loading: false })
 
-export const buttonVariants = cva(
-  'inline-flex transition-colors bg-transparent items-center justify-center whitespace-nowrap rounded text-sm font-medium focus-visible:outline-none disabled:bg-neutral-300 disabled:text-white',
-  {
-    variants: {
-      variant: {
-        default: 'bg-primary text-white shadow hover:bg-primary/90',
-        destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
-        outline:
-          'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
-        secondary:
-          'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 border-neutral-100 border',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'text-primary underline-offset-4 hover:underline',
-        icon: 'hover:!bg-neutral-50 hover:text-accent-foreground'
-      },
-      size: {
-        default: 'h-9 px-4 py-2',
-        sm: 'h-8 rounded px-3 text-xs',
-        lg: 'h-10 rounded px-8',
-        icon: 'min-h-6 min-w-6 p-1',
-        tiny: 'h-6 w-6 rounded',
-        none: ''
-      }
+export const buttonVariants = cva({
+  base: 'inline-flex transition-colors bg-transparent items-center justify-center whitespace-nowrap rounded text-sm font-medium focus-visible:outline-none disabled:bg-neutral-300 disabled:text-white',
+  variants: {
+    variant: {
+      default: 'bg-primary text-white shadow hover:bg-primary/90',
+      destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
+      outline:
+        'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
+      secondary:
+        'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 border-neutral-100 border',
+      ghost: 'hover:bg-accent hover:text-accent-foreground',
+      link: 'text-primary underline-offset-4 hover:underline',
+      icon: 'hover:!bg-neutral-50 hover:text-accent-foreground'
     },
-    defaultVariants: {
-      variant: 'default',
-      size: 'default'
+    size: {
+      default: 'h-9 px-4 py-2',
+      sm: 'h-8 rounded px-3 text-xs',
+      lg: 'h-10 rounded px-8',
+      icon: 'min-h-6 min-w-6 p-1',
+      tiny: 'h-6 w-6 rounded',
+      none: ''
     }
+  },
+  defaultVariants: {
+    variant: 'default',
+    size: 'default'
   }
-)
+})
 
 export interface YcButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -55,9 +53,21 @@ export interface YcButtonProps
 }
 
 const DButton = forwardRef<HTMLButtonElement, YcButtonProps>(
-  ({ className, variant, size, asChild = false, children, showLoading, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      children,
+      showLoading,
+      loading: outLoading,
+      ...props
+    },
+    ref
+  ) => {
     const Comp = asChild ? Slot : 'button'
-    const { loading, onClick } = useButton(props)
+    const { loading, onClick } = useButton({ loading: outLoading, ...props })
 
     const contextValue = useMemo(() => ({ loading }), [loading])
 

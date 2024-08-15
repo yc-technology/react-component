@@ -75,7 +75,7 @@ const app = async ({ mode }: ConfigEnv): Promise<UserConfigExport> => {
           'react/jsx-runtime',
           'react-dom',
           'tailwindcss',
-          'class-variance-authority',
+          'cva',
           'tailwind-merge',
           'clsx',
           '@yc-tech/shared',
@@ -103,7 +103,6 @@ const app = async ({ mode }: ConfigEnv): Promise<UserConfigExport> => {
           banner: `'use client';`,
           globals: {
             react: 'React',
-            'class-variance-authority': 'class-variance-authority',
             'react/jsx-runtime': 'react/jsx-runtime',
             'react-dom': 'ReactDOM',
             'tailwind-merge': 'tailwind-merge',

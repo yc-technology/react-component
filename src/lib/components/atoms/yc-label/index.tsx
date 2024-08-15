@@ -2,10 +2,12 @@
 
 import * as React from 'react'
 import * as LabelPrimitive from '@radix-ui/react-label'
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva, type VariantProps } from 'cva'
 import { clsxm } from '@yc-tech/shared'
 
-const labelVariants = cva('text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70')
+const labelVariants = cva({
+  base: 'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+})
 
 const YcLabel = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,

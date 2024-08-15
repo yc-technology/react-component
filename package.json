@@ -1,22 +1,23 @@
 {
   "name": "@yc-tech/react-component",
   "private": false,
-  "version": "0.1.34",
+  "version": "0.1.32",
   "packageManager": "pnpm@9.0.6",
   "author": "django",
   "repository": {
     "type": "git",
     "url": "https://github.com/yc-technology/react-component"
   },
-  "main": "dist/lib/src/lib/index.js",
-  "module": "dist/es/src/lib/index.js",
+  "main": "dist/react-component.umd.js",
+  "module": "dist/react-component.es.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/es/src/lib/index.js"
+      "import": "./dist/react-component.es.js",
+      "require": "./dist/react-component.umd.js"
     },
-    "./dist/style.css": "./dist/es/style.css"
+    "./dist/style.css": "./dist/style.css"
   },
   "engines": {
     "node": "18"
@@ -35,6 +36,8 @@
   },
   "dependencies": {
     "@douyinfe/semi-ui": "^2.64.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "@floating-ui/react": "^0.26.12",
     "@hookform/resolvers": "^3.3.4",
     "@iconify/react": "^4.1.1",
@@ -60,8 +63,6 @@
     "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
     "react-hook-form": "^7.51.3",
     "@babel/core": "^7.24.4",
     "@iconify-json/mingcute": "^1.1.17",

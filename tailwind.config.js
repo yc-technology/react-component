@@ -1,10 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  corePlugins: {
+    preflight: false
+  },
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Inter', 'sans-serif']
       },
       colors: {
         danger: '#C9353F',
@@ -21,7 +24,7 @@ export default {
           600: '#CC9400',
           700: '#996F00',
           800: '#664B00',
-          900: '#332600',
+          900: '#332600'
         },
         neutral: {
           25: '#FAFAFA',
@@ -29,7 +32,7 @@ export default {
           75: 'var(--color-neutral-75)',
           100: 'var(--color-neutral-100)',
           200: '#B6B8B7',
-          300: '#ABAEB5',
+          300: '#ABAEB5'
         },
         primary: {
           DEFAULT: '#18978f',
@@ -41,26 +44,26 @@ export default {
           500: '#18978f',
           600: '#006b70',
           700: '#003742',
-          foreground: 'hsl(var(--primary-foreground) / <alpha-value>)',
+          foreground: 'hsl(var(--primary-foreground) / <alpha-value>)'
         },
         muted: {
           DEFAULT: 'hsl(var(--muted) / <alpha-value>)',
-          foreground: 'hsl(var(--muted-foreground) / <alpha-value>)',
+          foreground: 'hsl(var(--muted-foreground) / <alpha-value>)'
         },
         popover: {
           DEFAULT: 'hsl(var(--popover) / <alpha-value>)',
-          foreground: 'hsl(var(--popover-foreground) / <alpha-value>)',
+          foreground: 'hsl(var(--popover-foreground) / <alpha-value>)'
         },
         accent: {
           DEFAULT: 'hsl(var(--accent) / <alpha-value>)',
-          foreground: 'hsl(var(--accent-foreground) / <alpha-value>)',
+          foreground: 'hsl(var(--accent-foreground) / <alpha-value>)'
         },
         background: {
-          DEFAULT: 'hsl(var(--background) / <alpha-value>)',
-        },
-      },
-    },
+          DEFAULT: 'hsl(var(--background) / <alpha-value>)'
+        }
+      }
+    }
   },
   darkMode: 'class',
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require('tailwindcss-animate')]
 }

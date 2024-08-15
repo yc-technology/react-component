@@ -16,9 +16,11 @@ type YcSelectState = {
   searchValue: string
 }
 
+export type YcSelectOptionType = BaseOptionType | DefaultOptionType
+
 type YcSelectProps<
   ValueType = any,
-  OptionType extends BaseOptionType | DefaultOptionType = DefaultOptionType
+  OptionType extends YcSelectOptionType = DefaultOptionType
 > = SelectProps<ValueType, OptionType> & {
   children?: React.ReactNode
 } & React.RefAttributes<BaseSelectRef>

@@ -14,8 +14,7 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/react-component.es.js",
-      "require": "./dist/react-component.umd.js"
+      "import": "./dist/es/src/lib/index.js"
     },
     "./dist/style.css": "./dist/style.css"
   },

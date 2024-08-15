@@ -63,10 +63,10 @@ const app = async ({ mode }: ConfigEnv): Promise<UserConfigExport> => {
     build: {
       watch: isDev ? {} : undefined,
       lib: {
-        entry: path.resolve(__dirname, 'src/lib/index.ts'),
-        name: formattedName,
-        formats: ['es', 'umd'],
-        fileName: (format) => `${formattedName}.${format}.js`
+        entry: path.resolve(__dirname, 'src/lib/index.ts')
+        // name: formattedName
+        // formats: ['es', 'umd']
+        // fileName: (format) => `${formattedName}.${format}.js`
       },
       rollupOptions: {
         external: [
@@ -99,17 +99,25 @@ const app = async ({ mode }: ConfigEnv): Promise<UserConfigExport> => {
           '@floating-ui/react',
           'ahooks'
         ],
-        output: {
-          banner: `'use client';`,
-          globals: {
-            react: 'React',
-            'react/jsx-runtime': 'react/jsx-runtime',
-            'react-dom': 'ReactDOM',
-            'tailwind-merge': 'tailwind-merge',
-            clsx: 'clsx',
-            tailwindcss: 'tailwindcss'
+        output: [
+          {
+            banner: `'use client';`,
+            format: 'es',
+            dir: 'dist/es',
+            entryFileNames: '[name].js',
+            preserveModulesRoot: 'packages',
+            preserveModules: true
+          },
+          {
+            banner: `'use client';`,
+            format: 'cjs',
+            dir: 'dist/lib',
+            entryFileNames: '[name].js',
+            preserveModulesRoot: 'packages',
+            preserveModules: true,
+            exports: 'named'
           }
-        }
+        ]
       }
     },
     test: {

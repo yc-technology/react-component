@@ -70,7 +70,7 @@ const app = async ({ mode }: ConfigEnv): Promise<UserConfigExport> => {
       },
       rollupOptions: {
         external: [
-          'antd',
+          '@douyinfe/semi-ui',
           'react',
           'react/jsx-runtime',
           'react-dom',

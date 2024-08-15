@@ -8,15 +8,15 @@
     "type": "git",
     "url": "https://github.com/yc-technology/react-component"
   },
-  "main": "dist/react-component.umd.js",
-  "module": "dist/react-component.es.js",
+  "main": "dist/lib/src/lib/index.js",
+  "module": "dist/es/src/lib/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/es/src/lib/index.js"
     },
-    "./dist/style.css": "./dist/style.css"
+    "./dist/style.css": "./dist/es/style.css"
   },
   "engines": {
     "node": "18"

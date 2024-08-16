@@ -5,21 +5,21 @@ const config: StorybookConfig = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
-    '@storybook/addon-styling',
+    '@storybook/addon-styling'
   ],
   typescript: {
-    reactDocgen: 'react-docgen', // or false if you don't need docgen at all
+    reactDocgen: 'react-docgen' // or false if you don't need docgen at all
   },
   framework: {
     name: '@storybook/react-vite',
     options: {
       builder: {
-        viteConfigPath: '.storybook/vite.config.ts',
-      },
-    },
+        viteConfigPath: '.storybook/vite.config.ts'
+      }
+    }
   },
   docs: {
-    autodocs: 'tag',
-  },
+    autodocs: 'tag'
+  }
 }
 export default config

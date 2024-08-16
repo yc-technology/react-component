@@ -9,7 +9,8 @@ export default {
       fontFamily: {
         sans: ['Inter', 'sans-serif']
       },
-      colors: {
+      colors: (theme) => ({
+        ...theme.colors,
         danger: '#C9353F',
         destructive: '#C9353F',
         success: '#00A870',
@@ -25,14 +26,6 @@ export default {
           700: '#996F00',
           800: '#664B00',
           900: '#332600'
-        },
-        neutral: {
-          25: '#FAFAFA',
-          50: '#F3F3F3',
-          75: 'var(--color-neutral-75)',
-          100: 'var(--color-neutral-100)',
-          200: '#B6B8B7',
-          300: '#ABAEB5'
         },
         primary: {
           DEFAULT: '#18978f',
@@ -61,7 +54,7 @@ export default {
         background: {
           DEFAULT: 'hsl(var(--background) / <alpha-value>)'
         }
-      }
+      })
     }
   },
   darkMode: 'class',

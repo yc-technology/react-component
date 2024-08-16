@@ -3,9 +3,16 @@ import { useButton } from '~/lib/hooks/useButton'
 import { YcButtonProps } from '../yc-button'
 import { YcIcon, YcIconProps } from '../yc-icon'
 import { cva } from 'cva'
+import { Tooltip } from '@douyinfe/semi-ui'
+import { TooltipProps } from '@douyinfe/semi-ui/lib/es/tooltip'
 
 export type IconButtonProps = Omit<YcButtonProps, 'size'> &
-  YcIconProps & { size?: 'small' | 'medium' | 'large'; showDefaultBgColor?: boolean }
+  YcIconProps & {
+    size?: 'small' | 'medium' | 'large'
+    showDefaultBgColor?: boolean
+    tooltip?: string
+    tooltipProps?: TooltipProps
+  }
 const variants = cva({
   variants: {
     size: {
@@ -28,24 +35,39 @@ export function YcIconButton({
   icon,
   disabled,
   showDefaultBgColor = true,
+  tooltip,
+  tooltipProps,
   ...props
 }: IconButtonProps) {
   const { onClick, loading } = useButton({ onClick: outSideClick, ...props })
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled || loading}
-      className={clsxm(
-        'transition-all duration-500 text-opacity-60 hover:text-opacity-100 text-black hover:bg-neutral-50 rounded p-[2px] disabled:cursor-not-allowed',
-        showDefaultBgColor ? 'bg-neutral-25' : 'bg-transparent',
-        variants({ padding: size }),
-        className
-      )}>
-      <YcIcon
-        icon={loading ? 'mingcute:loading-line' : icon}
-        {...props}
-        className={clsxm({ 'animate-spin': loading }, variants({ size: size }))}
-      />
-    </button>
-  )
+
+  const renderIcon = () => {
+    return (
+      <button
+        onClick={onClick}
+        disabled={disabled || loading}
+        className={clsxm(
+          'transition-all duration-300 text-opacity-60 hover:text-opacity-100 text-black hover:bg-neutral-200 rounded p-[2px] disabled:cursor-not-allowed',
+          showDefaultBgColor ? 'bg-neutral-100' : 'bg-transparent',
+          variants({ padding: size }),
+          className
+        )}>
+        <YcIcon
+          icon={loading ? 'mingcute:loading-line' : icon}
+          {...props}
+          className={clsxm({ 'animate-spin': loading }, variants({ size: size }))}
+        />
+      </button>
+    )
+  }
+
+  if (tooltip) {
+    return (
+      <Tooltip content={tooltip} {...tooltipProps}>
+        {renderIcon()}
+      </Tooltip>
+    )
+  }
+
+  return renderIcon()
 }

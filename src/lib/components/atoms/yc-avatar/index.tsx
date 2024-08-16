@@ -22,7 +22,7 @@ const YcAvatar = (props: YcAvatarProps) => {
   return (
     <div
       className={clsxm(
-        'flex items-center justify-center w-7 h-7 rounded-2 bg-neutral-75 flex-shrink-0',
+        'flex items-center justify-center w-7 h-7 rounded-2 bg-neutral-100 flex-shrink-0',
         { 'rounded-full': props.rounded },
         props.className
       )}>

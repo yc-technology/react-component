@@ -38,7 +38,7 @@ const YcInput = React.forwardRef<HTMLInputElement, YcInputProps>(
         className={clsxm(
           'flex gap-1 items-center h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-within:bg-white focus-within:border-primary',
           { '!border-destructive': !!error },
-          { 'cursor-not-allowed bg-neutral-25': !!rest.disabled },
+          { 'cursor-not-allowed bg-neutral-50': !!rest.disabled },
           className
         )}>
         {prefix}

@@ -3,9 +3,7 @@ import { BaseFormProps, FormApi } from '@douyinfe/semi-ui/lib/es/form'
 export type AtFormProps<T extends Record<string, any> = any> = BaseFormProps<T>
 export type AtFormApi<T extends object = any> = FormApi<T>
 
-export function AtForm<T extends Record<string, any> = any>({ ...props }: AtFormProps<T>) {
-  return <Form {...props} />
-}
+export const AtForm = Form
 
 AtForm.Input = Form.Input
 AtForm.InputNumber = Form.InputNumber

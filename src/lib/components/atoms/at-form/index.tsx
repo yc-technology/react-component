@@ -1,8 +1,19 @@
 import { Form, FormInstance, FormProps } from 'antd'
+import { forwardRef, Ref } from 'react'
 export type AtFormProps<T extends Record<string, any> = any> = FormProps<T>
 export type AtFormInstance<T extends object = any> = FormInstance<T>
 
-export const AtForm = Form
+function AtFormComp<T extends Record<string, any> = any>(
+  { ...props }: AtFormProps<T>,
+  ref?: Ref<AtFormInstance<T>>
+) {
+  // @ts-expect-error: ref type is not correct
+  return <Form<T> {...props} ref={ref} />
+}
+
+export const AtForm = forwardRef(AtFormComp) as <T extends Record<string, any> = any>(
+  p: AtFormProps<T> & { ref?: AtFormInstance<T> }
+) => JSX.Element
 
 // AtForm.Input = Form.Input
 // AtForm.InputNumber = Form.InputNumber

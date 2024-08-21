@@ -11,11 +11,18 @@ function AtFormComp<T extends Record<string, any> = any>(
   return <Form<T> {...props} ref={ref} />
 }
 
-export const AtForm = forwardRef(AtFormComp) as <T extends Record<string, any> = any>(
-  p: AtFormProps<T> & { ref?: AtFormInstance<T> }
-) => JSX.Element
+// @ts-expect-error: ref type is not correct
+export const AtForm = forwardRef(AtFormComp) as typeof Form
 
-// AtForm.Input = Form.Input
+AtForm.Item = Form.Item
+AtForm.List = Form.List
+AtForm.Provider = Form.Provider
+AtForm.ErrorList = Form.ErrorList
+AtForm.useForm = Form.useForm
+AtForm.create = Form.create
+AtForm.useFormInstance = Form.useFormInstance
+AtForm.useWatch = Form.useWatch
+
 // AtForm.InputNumber = Form.InputNumber
 // AtForm.InputGroup = Form.InputGroup
 

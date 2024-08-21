@@ -35,7 +35,6 @@
     "prepack": "json -f package.json -I -e \"delete this.devDependencies;\""
   },
   "dependencies": {
-    "@douyinfe/semi-ui": "^2.64.0",
     "@floating-ui/react": "^0.26.22",
     "@hookform/resolvers": "^3.9.0",
     "@iconify/react": "^4.1.1",
@@ -47,6 +46,7 @@
     "@radix-ui/react-tooltip": "^1.1.2",
     "@yc-tech/shared": "^0.1.12",
     "ahooks": "^3.8.1",
+    "antd": "^5.20.2",
     "clsx": "^2.1.1",
     "cva": "1.0.0-beta.1",
     "framer-motion": "^11.3.28",

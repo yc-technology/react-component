@@ -1,7 +1,6 @@
-import { Form } from '@douyinfe/semi-ui'
-import { BaseFormProps, FormApi } from '@douyinfe/semi-ui/lib/es/form'
-export type AtFormProps<T extends Record<string, any> = any> = BaseFormProps<T>
-export type AtFormApi<T extends object = any> = FormApi<T>
+import { Form, FormInstance, FormProps } from 'antd'
+export type AtFormProps<T extends Record<string, any> = any> = FormProps<T>
+export type AtFormInstance<T extends object = any> = FormInstance<T>
 
 export const AtForm = Form
 

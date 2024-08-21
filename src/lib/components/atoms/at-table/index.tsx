@@ -1,20 +1,17 @@
-import { Table } from '@douyinfe/semi-ui'
-import { ColumnProps, Data, TableProps } from '@douyinfe/semi-ui/lib/es/table'
+import { Table, TableColumnsType, TableProps } from 'antd'
+import { AnyObject } from 'antd/es/_util/type'
 import { forwardRef, ReactElement, Ref, useImperativeHandle } from 'react'
 
-export type AtColumnProps<T extends Record<string, any> = Data> = ColumnProps<T>
-export type AtTableRef<T extends Record<string, any> = Data> = {
-  columns?: AtColumnProps<T>[]
+export type AtColumnProps<T = AnyObject> = TableColumnsType<T>
+export type AtTableIns<T = AnyObject> = {
+  columns?: AtColumnProps<T>
 }
 
-function AtTableComp<T extends Record<string, any> = Data>(
-  props: TableProps<T>,
-  ref: Ref<AtTableRef<T>>
-) {
+function AtTableComp<T = AnyObject>(props: TableProps<T>, ref: Ref<AtTableIns<T>>) {
   useImperativeHandle(ref, () => ({ columns: props.columns }), [ref])
   return <Table<T> {...props} />
 }
 
-export const AtTable = forwardRef(AtTableComp) as <T extends Record<string, any> = Data>(
-  p: TableProps<T> & { ref?: Ref<AtTableRef<T>> }
+export const AtTable = forwardRef(AtTableComp) as <T = AnyObject>(
+  p: TableProps<T> & { ref?: Ref<AtTableIns<T>> }
 ) => ReactElement

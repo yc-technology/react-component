@@ -3,8 +3,7 @@ import { useButton } from '~/lib/hooks/useButton'
 import { YcButtonProps } from '../yc-button'
 import { YcIcon, YcIconProps } from '../yc-icon'
 import { cva } from 'cva'
-import { Tooltip } from '@douyinfe/semi-ui'
-import { TooltipProps } from '@douyinfe/semi-ui/lib/es/tooltip'
+import { Tooltip, TooltipProps } from 'antd'
 
 export type IconButtonProps = Omit<YcButtonProps, 'size'> &
   YcIconProps & {
@@ -63,7 +62,7 @@ export function YcIconButton({
 
   if (tooltip) {
     return (
-      <Tooltip content={tooltip} {...tooltipProps}>
+      <Tooltip title={tooltip} {...tooltipProps}>
         {renderIcon()}
       </Tooltip>
     )

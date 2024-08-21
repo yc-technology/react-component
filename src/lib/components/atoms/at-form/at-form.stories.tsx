@@ -1,6 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react'
 import React from 'react'
-import { AtForm, AtFormApi, AtFormProps } from '.'
+import { AtForm, AtFormInstance, AtFormProps } from '.'
+import { Input } from 'antd'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta: Meta<typeof AtForm> = {
@@ -16,10 +17,12 @@ export default meta
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof AtForm> = (args: AtFormProps) => {
-  const formApi = React.useRef<AtFormApi>()
+  const formIns = React.useRef<AtFormInstance>(null)
   return (
-    <AtForm {...args} getFormApi={(e) => (formApi.current = e)}>
-      <AtForm.Input field="user" />
+    <AtForm {...args} ref={formIns}>
+      <AtForm.Item label="User" name="user">
+        <Input />
+      </AtForm.Item>
     </AtForm>
   )
 }

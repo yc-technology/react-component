@@ -9,29 +9,29 @@ import { name } from './package.json'
 import prefixer from 'postcss-prefix-selector'
 import autoprefixer from 'autoprefixer'
 
-const localePaths = [
-  { lang: 'zh_CN', path: '@douyinfe/semi-ui/lib/es/locale/source/zh_CN' },
-  { lang: 'en_GB', path: '@douyinfe/semi-ui/lib/es/locale/source/en_GB' },
-  { lang: 'en_US', path: '@douyinfe/semi-ui/lib/es/locale/source/en_US' },
-  { lang: 'ko_KR', path: '@douyinfe/semi-ui/lib/es/locale/source/ko_KR' },
-  { lang: 'ja_JP', path: '@douyinfe/semi-ui/lib/es/locale/source/ja_JP' },
-  { lang: 'vi_VN', path: '@douyinfe/semi-ui/lib/es/locale/source/vi_VN' },
-  { lang: 'ru_RU', path: '@douyinfe/semi-ui/lib/es/locale/source/ru_RU' },
-  { lang: 'id_ID', path: '@douyinfe/semi-ui/lib/es/locale/source/id_ID' },
-  { lang: 'ms_MY', path: '@douyinfe/semi-ui/lib/es/locale/source/ms_MY' },
-  { lang: 'th_TH', path: '@douyinfe/semi-ui/lib/es/locale/source/th_TH' },
-  { lang: 'tr_TR', path: '@douyinfe/semi-ui/lib/es/locale/source/tr_TR' },
-  { lang: 'pt_BR', path: '@douyinfe/semi-ui/lib/es/locale/source/pt_BR' },
-  { lang: 'zh_TW', path: '@douyinfe/semi-ui/lib/es/locale/source/zh_TW' },
-  { lang: 'sv_SE', path: '@douyinfe/semi-ui/lib/es/locale/source/sv_SE' },
-  { lang: 'pl_PL', path: '@douyinfe/semi-ui/lib/es/locale/source/pl_PL' },
-  { lang: 'nl_NL', path: '@douyinfe/semi-ui/lib/es/locale/source/nl_NL' },
-  { lang: 'ar', path: '@douyinfe/semi-ui/lib/es/locale/source/ar' },
-  { lang: 'es', path: '@douyinfe/semi-ui/lib/es/locale/source/es' },
-  { lang: 'it', path: '@douyinfe/semi-ui/lib/es/locale/source/it' },
-  { lang: 'de', path: '@douyinfe/semi-ui/lib/es/locale/source/de' },
-  { lang: 'fr', path: '@douyinfe/semi-ui/lib/es/locale/source/fr' },
-  { lang: 'ro', path: '@douyinfe/semi-ui/lib/es/locale/source/ro' }
+const locales = [
+  { lang: 'zh_CN', path: 'antd/locale/zh_CN' },
+  { lang: 'en_GB', path: 'antd/locale/en_GB' },
+  { lang: 'en_US', path: 'antd/locale/en_US' },
+  { lang: 'ko_KR', path: 'antd/locale/ko_KR' },
+  { lang: 'ja_JP', path: 'antd/locale/ja_JP' },
+  { lang: 'vi_VN', path: 'antd/locale/vi_VN' },
+  { lang: 'ru_RU', path: 'antd/locale/ru_RU' },
+  { lang: 'id_ID', path: 'antd/locale/id_ID' },
+  { lang: 'ms_MY', path: 'antd/locale/ms_MY' },
+  { lang: 'th_TH', path: 'antd/locale/th_TH' },
+  { lang: 'tr_TR', path: 'antd/locale/tr_TR' },
+  { lang: 'pt_BR', path: 'antd/locale/pt_BR' },
+  { lang: 'zh_TW', path: 'antd/locale/zh_TW' },
+  { lang: 'sv_SE', path: 'antd/locale/sv_SE' },
+  { lang: 'pl_PL', path: 'antd/locale/pl_PL' },
+  { lang: 'nl_NL', path: 'antd/locale/nl_NL' },
+  { lang: 'ar_EG', path: 'antd/locale/ar_EG' },
+  { lang: 'es_ES', path: 'antd/locale/es_ES' },
+  { lang: 'it_IT', path: 'antd/locale/it_IT' },
+  { lang: 'de_DE', path: 'antd/locale/de_DE' },
+  { lang: 'fr_FR', path: 'antd/locale/fr_FR' },
+  { lang: 'ro_RO', path: 'antd/locale/ro_RO' }
 ]
 
 const app = async ({ mode }: ConfigEnv): Promise<UserConfigExport> => {
@@ -95,8 +95,8 @@ const app = async ({ mode }: ConfigEnv): Promise<UserConfigExport> => {
       },
       rollupOptions: {
         external: [
-          '@douyinfe/semi-ui',
-          ...localePaths.map(({ path }) => path),
+          'antd',
+          ...locales.map(({ path }) => path),
           'react',
           'react/jsx-runtime',
           'react-dom',

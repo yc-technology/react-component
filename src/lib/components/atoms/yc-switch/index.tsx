@@ -1,9 +1,10 @@
-import { forwardRef } from 'react'
-import { Switch } from '@douyinfe/semi-ui'
-import { SwitchProps } from '@douyinfe/semi-ui/lib/es/switch'
+import { Switch, SwitchProps } from 'antd'
+import { forwardRef, useRef } from 'react'
 
 export type YcSwitchProps = SwitchProps
+export type YcSwitchIns = HTMLButtonElement
 
-export const YcSwitch = forwardRef<Switch, YcSwitchProps>((props, ref) => {
+export const YcSwitch = forwardRef<HTMLButtonElement, YcSwitchProps>((props, ref) => {
+  const r = useRef<HTMLButtonElement>(null)
   return <Switch ref={ref} {...props} />
 })

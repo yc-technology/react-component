@@ -1,11 +1,14 @@
 'use client'
 
-import { Select } from '@douyinfe/semi-ui'
-import { SelectProps, OptionProps } from '@douyinfe/semi-ui/lib/es/select'
+import { Select, RefSelectProps } from 'antd'
+import { OptionProps, SelectProps } from 'antd/es/select'
+import { forwardRef } from 'react'
 export type YcSelectOptionProps = OptionProps
-
-export function YcSelect(props: SelectProps) {
-  return <Select {...props} />
+export type YcSelectIns = React.LegacyRef<RefSelectProps>
+function YcSelectComp<T>(props: SelectProps, ref?: YcSelectIns) {
+  return <Select<T> {...props} ref={ref} />
 }
 
-YcSelect.displayName = 'YcSelect'
+export const YcSelect = forwardRef(YcSelectComp) as <T = any>(
+  p: SelectProps<T> & { ref?: RefSelectProps }
+) => JSX.Element

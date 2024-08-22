@@ -1,9 +1,9 @@
 'use client'
 
 import { Select, RefSelectProps } from 'antd'
-import { OptionProps, SelectProps } from 'antd/es/select'
+import { DefaultOptionType, SelectProps } from 'antd/es/select'
 import { forwardRef } from 'react'
-export type YcSelectOptionProps = OptionProps
+export type YcSelectOptionType = DefaultOptionType
 export type YcSelectIns = React.LegacyRef<RefSelectProps>
 function YcSelectComp<T>(props: SelectProps, ref?: YcSelectIns) {
   return <Select<T> {...props} ref={ref} />

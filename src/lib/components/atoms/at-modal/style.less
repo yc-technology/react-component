@@ -1,0 +1,51 @@
+.at-modal {
+  .effect() {
+    animation-duration: 0.2s;
+    animation-fill-mode: both;
+  }
+
+  &-ycc-enter,
+  &-ycc-appear {
+    opacity: 0;
+    .effect();
+    animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+    animation-play-state: paused;
+  }
+
+  &-ycc-leave {
+    .effect();
+    animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+    animation-play-state: paused;
+  }
+
+  &-ycc-enter&-ycc-enter-active,
+  &-ycc-appear&-ycc-appear-active {
+    animation-name: yccZoomIn;
+    animation-play-state: running;
+  }
+
+  &-ycc-leave&-ycc-leave-active {
+    animation-name: yccZoomOut;
+    animation-play-state: running;
+  }
+
+  @keyframes yccZoomIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.95, 0.95) translate(0, 20px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1, 1) translate(0, 0);
+    }
+  }
+  @keyframes yccZoomOut {
+    0% {
+      transform: scale(1, 1) translate(0, 0);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.95, 0.95) translate(0, 20px);
+    }
+  }
+}

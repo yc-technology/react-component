@@ -1,9 +1,9 @@
+import { useUpdateEffect } from 'ahooks'
 import { TablePaginationConfig } from 'antd'
-import { AtTableProps } from '../components/atoms/at-table'
 import { AnyObject } from 'antd/es/_util/type'
 import { keys } from 'lodash-es'
-import { useEffect, useRef, useState } from 'react'
-import { useUpdateEffect } from 'ahooks'
+import { useEffect, useState } from 'react'
+import { AtTableProps } from '../components/atoms/at-table'
 
 export type TableFetchApi<
   T extends Record<string, any> = AnyObject,
@@ -51,6 +51,7 @@ export function useAtTable<
   const pagination = innerPagination ?? false
   const pageSize = typeof pagination === 'boolean' ? 20 : pagination?.pageSize
   const page = typeof pagination === 'boolean' ? 1 : pagination?.current
+  const [counter, setCounter] = useState(0)
 
   const callFetchApi = async (filterValues?: FilterValue, pagination?: TablePaginationConfig) => {
     try {
@@ -107,7 +108,7 @@ export function useAtTable<
 
   useUpdateEffect(() => {
     callFetchApi(filterValues, innerPagination)
-  }, [page, pageSize, JSON.stringify(filterValues)])
+  }, [page, pageSize, JSON.stringify(filterValues), counter])
 
   useEffect(() => {
     if (immediate) {
@@ -118,6 +119,7 @@ export function useAtTable<
   const reload = async () => {
     setInnerSetPagination(typeof outerPagination === 'boolean' ? undefined : outerPagination)
     setFilterValues(filterDefaultValues)
+    setCounter(counter + 1)
   }
 
   return { dataSource, setDateSource, tableProps, filterValues, reload, setFilterValues }

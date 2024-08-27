@@ -2,7 +2,8 @@ import { TablePaginationConfig } from 'antd'
 import { AtTableProps } from '../components/atoms/at-table'
 import { AnyObject } from 'antd/es/_util/type'
 import { keys } from 'lodash-es'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useUpdateEffect } from 'ahooks'
 
 export type TableFetchApi<
   T extends Record<string, any> = AnyObject,
@@ -10,6 +11,8 @@ export type TableFetchApi<
 > = (data: {
   filterValues?: FilterValue
   pagination?: TablePaginationConfig
+  page: number
+  pageSize: number
 }) => Promise<{ data: T[]; total: number }>
 
 type UseTableOptions<
@@ -19,6 +22,7 @@ type UseTableOptions<
   filterDefaultValues?: FilterValue
   setDateSource?: (data: T[]) => void
   fetchApi?: TableFetchApi<T, FilterValue>
+  immediate?: boolean
 } & AtTableProps<T>
 
 export function useAtTable<
@@ -27,6 +31,7 @@ export function useAtTable<
 >({
   filterDefaultValues,
   fetchApi,
+  immediate = true,
   dataSource: outerDataSource,
   loading: outerLoading,
   pagination: outerPagination = {
@@ -50,7 +55,12 @@ export function useAtTable<
   const callFetchApi = async (filterValues?: FilterValue, pagination?: TablePaginationConfig) => {
     try {
       setLoading(true)
-      const res = await fetchApi?.({ filterValues: filterValues, pagination })
+      const res = await fetchApi?.({
+        filterValues: filterValues,
+        pagination,
+        page: pagination?.current ?? 1,
+        pageSize: pagination?.pageSize ?? pageSize ?? 20
+      })
       if (res) {
         setDateSource(res.data)
         if (res.total)
@@ -83,12 +93,9 @@ export function useAtTable<
     onChange:
       options.onChange ??
       (async (pagination, filters, sorter, extra) => {
-        console.log('filters', filters)
         if (filterValues) {
           keys(filterValues).forEach((key) => {
-            if (filters[key]) {
-              ;(filterValues[key] as Record<string, any>) = filters[key]
-            }
+            ;(filterValues[key] as any) = filters[key]
           })
           setFilterValues({ ...filterValues })
           setInnerSetPagination(pagination)
@@ -98,9 +105,20 @@ export function useAtTable<
     ...options
   }
 
-  useEffect(() => {
+  useUpdateEffect(() => {
     callFetchApi(filterValues, innerPagination)
   }, [page, pageSize, JSON.stringify(filterValues)])
 
-  return { dataSource, setDateSource, tableProps, filterValues, setFilterValues }
+  useEffect(() => {
+    if (immediate) {
+      callFetchApi(filterValues, innerPagination)
+    }
+  }, [])
+
+  const reload = async () => {
+    setInnerSetPagination(typeof outerPagination === 'boolean' ? undefined : outerPagination)
+    setFilterValues(filterDefaultValues)
+  }
+
+  return { dataSource, setDateSource, tableProps, filterValues, reload, setFilterValues }
 }

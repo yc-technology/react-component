@@ -62,12 +62,21 @@ const DButton = forwardRef<HTMLButtonElement, YcButtonProps>(
       children,
       showLoading,
       loading: outLoading,
+      autoSync,
+      preventDefault,
+      stopPropagation,
       ...props
     },
     ref
   ) => {
     const Comp = asChild ? Slot : 'button'
-    const { loading, onClick } = useButton({ loading: outLoading, ...props })
+    const { loading, onClick } = useButton({
+      loading: outLoading,
+      preventDefault: preventDefault,
+      stopPropagation: stopPropagation,
+      autoSync,
+      ...props
+    })
 
     const contextValue = useMemo(() => ({ loading }), [loading])
 

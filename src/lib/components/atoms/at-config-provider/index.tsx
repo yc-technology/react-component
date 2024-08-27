@@ -1,3 +1,5 @@
+'use client'
+
 import { ConfigProvider, ConfigProviderProps } from 'antd'
 
 export type AtConfigProviderProps = ConfigProviderProps

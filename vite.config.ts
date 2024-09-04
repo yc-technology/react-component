@@ -2,8 +2,6 @@ import react from '@vitejs/plugin-react'
 import path from 'node:path'
 import { defineConfig } from 'vitest/config'
 import dts from 'vite-plugin-dts'
-import tailwindcss from 'tailwindcss'
-import nesting from 'tailwindcss/nesting'
 import { ConfigEnv, UserConfigExport } from 'vite'
 import { name } from './package.json'
 import prefixer from 'postcss-prefix-selector'
@@ -59,8 +57,6 @@ const app = async ({ mode }: ConfigEnv): Promise<UserConfigExport> => {
     css: {
       postcss: {
         plugins: [
-          nesting,
-          tailwindcss,
           prefixer({
             prefix: '.yc',
             transform(prefix, selector, prefixedSelector, filePath, rule) {

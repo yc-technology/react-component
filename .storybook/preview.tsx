@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/react'
-import '../src/lib/tailwind/theme.css'
-import '../src/lib/styles/preflight.css'
 import '../src/lib/styles/index.scss'
+import '../src/lib/styles/preflight.css'
+import '../src/lib/tailwind/theme.css'
 
 const preview: Preview = {
   parameters: {
@@ -13,6 +13,11 @@ const preview: Preview = {
       }
     }
   }
+  // render: (arg, ctx) => (
+  //   <div className="p-4">
+  //     <BrowserRouter basename="/">{ctx.storyFn(arg)}</BrowserRouter>
+  //   </div>
+  // )
 }
 
 export default preview

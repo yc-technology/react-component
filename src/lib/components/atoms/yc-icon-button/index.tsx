@@ -36,9 +36,16 @@ export function YcIconButton({
   showDefaultBgColor = true,
   tooltip,
   tooltipProps,
+  stopPropagation,
+  preventDefault,
   ...props
 }: IconButtonProps) {
-  const { onClick, loading } = useButton({ onClick: outSideClick, ...props })
+  const { onClick, loading } = useButton({
+    onClick: outSideClick,
+    stopPropagation,
+    preventDefault,
+    ...props
+  })
 
   const renderIcon = () => {
     return (

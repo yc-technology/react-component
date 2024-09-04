@@ -1,7 +1,12 @@
 import { useState } from 'react'
-import { YcButtonProps } from '../components'
 
-type UseButtonOptions = YcButtonProps
+export interface UseButtonOptions {
+  loading?: boolean
+  onClick?: (e: any) => void | Promise<any>
+  autoSync?: boolean
+  stopPropagation?: boolean
+  preventDefault?: boolean
+}
 
 export function useButton({
   loading: outerLoading,

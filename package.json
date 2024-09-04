@@ -17,7 +17,8 @@
       "import": "./dist/react-component.es.js",
       "require": "./dist/react-component.umd.js"
     },
-    "./dist/style.css": "./dist/style.css"
+    "./dist/style.css": "./dist/style.css",
+    "./tailwindPlugin": "./tailwind.plugin.js"
   },
   "engines": {
     "node": "18"
@@ -37,7 +38,7 @@
   "dependencies": {
     "@floating-ui/react": "^0.26.22",
     "@hookform/resolvers": "^3.9.0",
-    "@iconify/react": "^4.1.1",
+    "@iconify/react": "^5.0.2",
     "@radix-ui/react-collapsible": "^1.1.0",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-icons": "^1.3.0",
@@ -59,12 +60,14 @@
     "rc-textarea": "^1.8.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "react-resizable-panels": "^2.1.2",
+    "react-router-dom": "^6.26.1",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
-    "@iconify-json/mingcute": "^1.1.19",
+    "@iconify-json/mingcute": "^1.2.0",
     "@storybook/addon-essentials": "^8.2.9",
     "@storybook/addon-interactions": "^8.2.9",
     "@storybook/addon-links": "^8.2.9",
@@ -107,7 +110,8 @@
     "vitest": "^2.0.5"
   },
   "files": [
-    "dist"
+    "dist",
+    "tailwind.plugin.js"
   ],
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,css,md}": [

@@ -39,7 +39,7 @@ export function YcDot({
           style={{ top: y || 0, right: x || 0 }}>
           <div
             className={clsxm(
-              'rounded-full  bg-danger p-1 leading-none text-white flex items-center justify-center w-full h-full',
+              'rounded-full  bg-destructive p-1 leading-none text-white flex items-center justify-center w-full h-full',
               className
             )}>
             {dot ? undefined : value}

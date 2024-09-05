@@ -54,33 +54,33 @@ const app = async ({ mode }: ConfigEnv): Promise<UserConfigExport> => {
         insertTypesEntry: true
       })
     ],
-    css: {
-      postcss: {
-        plugins: [
-          prefixer({
-            prefix: '.yc',
-            transform(prefix, selector, prefixedSelector, filePath, rule) {
-              if (selector.match(/^(html|body)/)) {
-                return selector.replace(/^([^\s]*)/, `$1 ${prefix}`)
-              }
+    // css: {
+    //   postcss: {
+    //     plugins: [
+    //       prefixer({
+    //         prefix: '.yc',
+    //         transform(prefix, selector, prefixedSelector, filePath, rule) {
+    //           if (selector.match(/^(html|body)/)) {
+    //             return selector.replace(/^([^\s]*)/, `$1 ${prefix}`)
+    //           }
 
-              if (filePath.match(/node_modules/)) {
-                return selector // Do not prefix styles imported from node_modules
-              }
+    //           if (filePath.match(/node_modules/)) {
+    //             return selector // Do not prefix styles imported from node_modules
+    //           }
 
-              const annotation = rule.prev()
-              if (annotation?.type === 'comment' && annotation.text.trim() === 'no-prefix') {
-                return selector // Do not prefix style rules that are preceded by: /* no-prefix */
-              }
+    //           const annotation = rule.prev()
+    //           if (annotation?.type === 'comment' && annotation.text.trim() === 'no-prefix') {
+    //             return selector // Do not prefix style rules that are preceded by: /* no-prefix */
+    //           }
 
-              return prefixedSelector
-            }
-          }),
+    //           return prefixedSelector
+    //         }
+    //       }),
 
-          autoprefixer({})
-        ]
-      }
-    },
+    //       autoprefixer({})
+    //     ]
+    //   }
+    // },
     build: {
       watch: isDev ? {} : undefined,
       lib: {

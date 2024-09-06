@@ -198,7 +198,7 @@ const YcFormField = <
 }
 
 // Form ----------------------------------------------------------------------
-type YcFormProps<
+export type YcFormProps<
   TFieldValues extends FieldValues,
   TContext = any,
   TTransformedValues extends FieldValues = TFieldValues

@@ -15,6 +15,12 @@ export type AtDialogProps = React.ComponentPropsWithoutRef<typeof DialogPrimitiv
 const AtDialog = React.forwardRef<AtDialogIns, AtDialogProps>(
   ({ open: propsOpen, onOpenChange, ...props }, ref) => {
     const [innerOpen, setInnerOpen] = React.useState(false)
+    const _onOpenChange = (open: boolean) => {
+      if (typeof propsOpen === 'undefined') {
+        setInnerOpen(open)
+      }
+      onOpenChange?.(open)
+    }
 
     React.useImperativeHandle(ref, () => ({
       open: () => _onOpenChange(true),
@@ -27,16 +33,6 @@ const AtDialog = React.forwardRef<AtDialogIns, AtDialogProps>(
       }
       return innerOpen
     }, [innerOpen, propsOpen])
-
-    const _onOpenChange = React.useCallback(
-      (open: boolean) => {
-        if (typeof propsOpen === 'undefined') {
-          setInnerOpen(open)
-        }
-        onOpenChange?.(open)
-      },
-      [propsOpen]
-    )
 
     return <DialogPrimitive.Root open={open} onOpenChange={_onOpenChange} {...props} />
   }

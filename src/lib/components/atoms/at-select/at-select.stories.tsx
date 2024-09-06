@@ -45,5 +45,8 @@ const options: AtSelectOption[] = [
 ]
 
 export const Default = bind({
-  options
+  options,
+  valueProps: {
+    placeholder: 'Select an option'
+  }
 })

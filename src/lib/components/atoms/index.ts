@@ -36,6 +36,7 @@ export * from './at-label'
 export * from './at-tooltip'
 export * from './at-select'
 export * from './at-checkbox'
+export * from './at-dialog'
 
 export * from 'antd'
 export * from './locales'

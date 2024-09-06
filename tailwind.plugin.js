@@ -2,6 +2,7 @@ const [plugin, { fontFamily }] = [
   require('tailwindcss/plugin'),
   require('tailwindcss/defaultTheme')
 ]
+/** @type {import('tailwindcss').Config} */
 module.exports = () =>
   plugin(({ addUtilities, matchUtilities, theme }) => {}, {
     content: ['./node_modules/@yc-tech/react-component/dist/react-component.es.js'],
@@ -45,6 +46,7 @@ module.exports = () =>
           }
         },
         borderRadius: {
+          xl: `calc(var(--radius) + 4px)`,
           lg: `var(--radius)`,
           md: `calc(var(--radius) - 2px)`,
           sm: 'calc(var(--radius) - 4px)'

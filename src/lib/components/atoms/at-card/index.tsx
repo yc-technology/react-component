@@ -6,7 +6,7 @@ export type AtCardProps = React.HTMLAttributes<HTMLDivElement>
 const AtCard = React.forwardRef<HTMLDivElement, AtCardProps>(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={clsxm('rounded-xl border bg-card text-card-foreground shadow', className)}
+    className={clsxm('rounded-md border bg-card text-card-foreground shadow', className)}
     {...props}
   />
 ))

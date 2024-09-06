@@ -143,18 +143,23 @@ export type AtSelectProps = React.ComponentProps<typeof AtSelectRoot> & {
   children?: React.ReactNode
   contentProps?: React.ComponentProps<typeof AtSelectContent>
   triggerProps?: React.ComponentProps<typeof AtSelectTrigger>
+  valueProps?: React.ComponentProps<typeof AtSelectValue>
   options?: AtSelectOption[]
   trigger?: React.ReactNode
 }
 type AtSelectIns = React.ElementRef<typeof AtSelectRoot>
 
 const AtSelect = React.forwardRef<AtSelectIns, AtSelectProps>(
-  ({ children, options, contentProps, triggerProps, trigger, ...props }, ref) => {
+  ({ children, options, contentProps, triggerProps, valueProps, trigger, ...props }, ref) => {
     const _idRef = React.useRef(uuid_v4())
 
     return (
       <AtSelectRoot {...props}>
-        {<AtSelectTrigger {...triggerProps}>{trigger ?? <AtSelectValue />}</AtSelectTrigger>}
+        {
+          <AtSelectTrigger {...triggerProps}>
+            {trigger ?? <AtSelectValue {...valueProps} />}
+          </AtSelectTrigger>
+        }
         <AtSelectContent {...contentProps}>
           {options?.map((option) => {
             return (

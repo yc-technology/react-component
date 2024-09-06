@@ -11,20 +11,46 @@ const AtSelectGroup = SelectPrimitive.Group
 
 const AtSelectValue = SelectPrimitive.Value
 
+export type AtSelectTriggerProps = React.ComponentPropsWithoutRef<
+  typeof SelectPrimitive.Trigger
+> & {
+  suffix?: React.ReactNode
+  // 是否开启 hover 时隐藏 suffix 只有在传入 suffix 才有效
+  suffixHoverHidden?: boolean
+}
 const AtSelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
+  AtSelectTriggerProps
+>(({ className, children, suffix, suffixHoverHidden, ...props }, ref) => (
   <SelectPrimitive.Trigger
     ref={ref}
     className={clsxm(
-      'flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 data-[placeholder]:text-muted-foreground',
+      'flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 data-[placeholder]:text-muted-foreground group',
       className
     )}
     {...props}>
     {children}
     <SelectPrimitive.Icon asChild>
-      <CaretSortIcon className="h-4 w-4 opacity-50" />
+      {suffix ? (
+        <div className="relative">
+          <div
+            className={clsxm(
+              'transition-opacity group-data-[selected="true"]:block ',
+              suffixHoverHidden && 'hidden opacity-0 group-hover:opacity-100'
+            )}>
+            {suffix}
+          </div>
+          {suffixHoverHidden && (
+            <CaretSortIcon
+              className={clsxm(
+                'h-4 w-4 opacity-50 left-0 top-0 group-hover:hidden group-data-[selected="true"]:absolute'
+              )}
+            />
+          )}
+        </div>
+      ) : (
+        <CaretSortIcon className="h-4 w-4 opacity-50" />
+      )}
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ))
@@ -98,24 +124,45 @@ const AtSelectLabel = React.forwardRef<
 ))
 AtSelectLabel.displayName = SelectPrimitive.Label.displayName
 
+export type AtSelectItemProps = React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item> & {
+  // 悬浮的节点
+  hoverSuffix?: React.ReactNode
+}
 const AtSelectItem = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
->(({ className, children, ...props }, ref) => (
-  <SelectPrimitive.Item
-    ref={ref}
-    className={clsxm(
-      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
-      className
+  AtSelectItemProps
+>(({ className, children, hoverSuffix, ...props }, ref) => (
+  <div className="group flex flex-col items-center justify-center relative">
+    <SelectPrimitive.Item
+      ref={ref}
+      className={clsxm(
+        ' relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+        className
+      )}
+      {...props}>
+      {/* 选中时显示的 icon */}
+      <span
+        className={clsxm(
+          'absolute right-2 flex h-3.5 w-3.5 items-center justify-center',
+          hoverSuffix && 'group-hover:hidden'
+        )}>
+        <SelectPrimitive.ItemIndicator>
+          <CheckIcon className="h-4 w-4" />
+        </SelectPrimitive.ItemIndicator>
+      </span>
+      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+    </SelectPrimitive.Item>
+    {/* 悬浮的 icon */}
+    {hoverSuffix && (
+      <span
+        className={clsxm(
+          'absolute right-2 flex transition-opacity items-center justify-center opacity-0',
+          'group-hover:opacity-100'
+        )}>
+        {hoverSuffix}
+      </span>
     )}
-    {...props}>
-    <span className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
-      <SelectPrimitive.ItemIndicator>
-        <CheckIcon className="h-4 w-4" />
-      </SelectPrimitive.ItemIndicator>
-    </span>
-    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-  </SelectPrimitive.Item>
+  </div>
 ))
 AtSelectItem.displayName = SelectPrimitive.Item.displayName
 
@@ -146,27 +193,49 @@ export type AtSelectProps = React.ComponentProps<typeof AtSelectRoot> & {
   valueProps?: React.ComponentProps<typeof AtSelectValue>
   options?: AtSelectOption[]
   trigger?: React.ReactNode
+  prefix?: React.ReactNode
+  itemHoverSuffix?: React.ReactNode
 }
-type AtSelectIns = React.ElementRef<typeof AtSelectRoot>
+export type AtSelectIns = React.ElementRef<typeof AtSelectTrigger>
 
 const AtSelect = React.forwardRef<AtSelectIns, AtSelectProps>(
-  ({ children, options, contentProps, triggerProps, valueProps, trigger, ...props }, ref) => {
+  (
+    {
+      children,
+      options,
+      prefix,
+      contentProps,
+      triggerProps,
+      valueProps,
+      itemHoverSuffix,
+      trigger,
+      onValueChange,
+      ...props
+    },
+    ref
+  ) => {
     const _idRef = React.useRef(uuid_v4())
-
+    const [_value, _setValue] = React.useState(props.value || props.defaultValue)
+    const _onValueChange = (v: string) => {
+      _setValue(v)
+      onValueChange?.(v)
+    }
     return (
-      <AtSelectRoot {...props}>
+      <AtSelectRoot onValueChange={_onValueChange} {...props}>
         {
-          <AtSelectTrigger {...triggerProps}>
+          <AtSelectTrigger ref={ref} data-selected={!!props.value || !!_value} {...triggerProps}>
             {trigger ?? <AtSelectValue {...valueProps} />}
           </AtSelectTrigger>
         }
         <AtSelectContent {...contentProps}>
+          {prefix}
           {options?.map((option) => {
             return (
               <AtSelectItem
                 key={`${_idRef.current}-select-item-${option.value}`}
                 value={option.value}
-                disabled={option.disabled}>
+                disabled={option.disabled}
+                hoverSuffix={itemHoverSuffix}>
                 {option.label}
               </AtSelectItem>
             )

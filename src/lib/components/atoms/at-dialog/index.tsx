@@ -17,8 +17,8 @@ const AtDialog = React.forwardRef<AtDialogIns, AtDialogProps>(
     const [innerOpen, setInnerOpen] = React.useState(false)
 
     React.useImperativeHandle(ref, () => ({
-      open: () => setInnerOpen(true),
-      close: () => setInnerOpen(false)
+      open: () => _onOpenChange(true),
+      close: () => _onOpenChange(false)
     }))
 
     const open = React.useMemo(() => {

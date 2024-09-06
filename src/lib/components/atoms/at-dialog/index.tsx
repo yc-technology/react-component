@@ -5,6 +5,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { Cross2Icon } from '@radix-ui/react-icons'
 import { YcButton } from '../yc-button'
 import { clsxm } from '@yc-tech/shared'
+import { AtButton } from '../at-button'
 
 export interface AtDialogIns {
   open: () => void
@@ -78,10 +79,10 @@ const AtDialogContent = React.forwardRef<
       <div className=" overflow-auto  max-h-[inherit]">
         {children}
         <DialogPrimitive.Close autoFocus={false} asChild className="absolute right-4 top-4">
-          <YcButton variant="ghost" size="tiny">
+          <AtButton variant="icon" size="icon" className="w-6 h-6">
             <Cross2Icon className="h-5 w-5" />
             <span className="sr-only">Close</span>
-          </YcButton>
+          </AtButton>
         </DialogPrimitive.Close>
       </div>
     </DialogPrimitive.Content>

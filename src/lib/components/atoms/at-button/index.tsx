@@ -17,7 +17,8 @@ const atButtonVariants = cva({
         'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
       secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
       ghost: 'hover:bg-accent hover:text-accent-foreground',
-      link: 'text-primary underline-offset-4 hover:underline'
+      link: 'text-primary underline-offset-4 hover:underline',
+      icon: 'transition-all bg-neutral-100 duration-300 text-opacity-60 hover:text-opacity-100 text-black hover:bg-neutral-200 rounded p-[2px] disabled:cursor-not-allowed'
     },
     size: {
       default: 'h-9 px-4 py-2 [&>.btn-icon]:w-4 [&>.btn-icon]:h-4',

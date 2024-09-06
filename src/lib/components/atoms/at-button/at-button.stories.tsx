@@ -61,6 +61,12 @@ export const Destructive = bind({
   variant: 'destructive'
 })
 
+export const Icon = bind({
+  variant: 'icon',
+  icon: <UpdateIcon />
+})
+
 export const Disabled = bind({
-  disabled: true
+  disabled: true,
+  icon: <UpdateIcon />
 })

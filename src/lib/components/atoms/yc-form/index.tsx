@@ -158,7 +158,13 @@ YcFormMessage.displayName = 'FormMessage'
 type FormFieldProps<TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>> = Omit<
   ControllerProps<TFieldValues, TName>,
   'render'
-> & { description?: string; children: React.ReactNode; label?: string }
+> & {
+  description?: string
+  children: React.ReactNode
+  label?: string
+  labelClassName?: string
+  className?: string
+}
 const FormFieldContext = React.createContext<YcFormFieldContextValue>({} as YcFormFieldContextValue)
 
 const YcFormField = <
@@ -168,6 +174,8 @@ const YcFormField = <
   description,
   children,
   label,
+  className,
+  labelClassName,
   ...props
 }: FormFieldProps<TFieldValues, TName>) => {
   return (
@@ -175,8 +183,8 @@ const YcFormField = <
       <Controller
         {...props}
         render={({ field }) => (
-          <YcFormItem>
-            {label && <YcFormLabel>{label}</YcFormLabel>}
+          <YcFormItem className={className}>
+            {label && <YcFormLabel className={labelClassName}>{label}</YcFormLabel>}
             <YcFormControl>
               <Slot {...field}>{children}</Slot>
             </YcFormControl>

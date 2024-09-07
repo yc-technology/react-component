@@ -62,7 +62,7 @@ const options: AtSelectOption[] = [
 export const Default = bind({
   options,
 
-  itemHoverSuffix: (
+  itemHoverSuffix: () => (
     <AtButton
       variant="outline"
       size="icon"

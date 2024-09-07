@@ -52,7 +52,7 @@ const AtButton = React.forwardRef<HTMLButtonElement, AtButtonProps>(
       variant,
       size,
       asChild = false,
-      loading,
+      loading: outerLoading,
       stopPropagation,
       onClick,
       preventDefault,
@@ -66,8 +66,8 @@ const AtButton = React.forwardRef<HTMLButtonElement, AtButtonProps>(
     ref
   ) => {
     const Comp = asChild ? Slot : 'button'
-    const { onClick: _onClick } = useButton({
-      loading,
+    const { onClick: _onClick, loading } = useButton({
+      loading: outerLoading,
       onClick,
       autoSync,
       stopPropagation,

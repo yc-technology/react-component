@@ -126,7 +126,7 @@ AtSelectLabel.displayName = SelectPrimitive.Label.displayName
 
 export type AtSelectItemProps = React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item> & {
   // 悬浮的节点
-  hoverSuffix?: React.ReactNode
+  hoverSuffix?: (value: string) => React.ReactNode
 }
 const AtSelectItem = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Item>,
@@ -159,7 +159,7 @@ const AtSelectItem = React.forwardRef<
           'absolute right-2 flex transition-opacity items-center justify-center opacity-0',
           'group-hover:opacity-100'
         )}>
-        {hoverSuffix}
+        {hoverSuffix(props.value)}
       </span>
     )}
   </div>
@@ -194,7 +194,7 @@ export type AtSelectProps = React.ComponentProps<typeof AtSelectRoot> & {
   options?: AtSelectOption[]
   trigger?: React.ReactNode
   prefix?: React.ReactNode
-  itemHoverSuffix?: React.ReactNode
+  itemHoverSuffix?: (value: string) => React.ReactNode
 }
 export type AtSelectIns = React.ElementRef<typeof AtSelectTrigger>
 

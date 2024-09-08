@@ -179,7 +179,7 @@ const AtAlertDialogAction = React.forwardRef<
     }
     close()
   }
-  return <AtButton ref={ref} onClick={_onClick} className={clsxm(className)} {...props} />
+  return <AtButton ref={ref} autoSync onClick={_onClick} className={clsxm(className)} {...props} />
 })
 
 AtAlertDialogAction.displayName = AlertDialogPrimitive.Action.displayName

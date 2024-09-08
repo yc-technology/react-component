@@ -3,7 +3,8 @@ import React from 'react'
 import { MlAlertDialog, MlAlertDialogIns, MlAlertDialogProps } from '.'
 import { nextTick, sleep } from '@yc-tech/shared'
 import { AtButton } from '../../atoms'
-
+import { MlAlertDialogProvider } from '../../../providers/ml-alert-dialog-provider'
+import { useMlAlertDialog } from '../../../hooks/useAlertDialog'
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta: Meta<typeof MlAlertDialog> = {
   title: 'Molecules/MlAlertDialog',
@@ -52,3 +53,27 @@ const bind = (args: MlAlertDialogProps) => {
 }
 
 export const Default = bind({})
+
+const ApiDemo = () => {
+  const { error, confirm, warning, info } = useMlAlertDialog()
+  return (
+    <div>
+      <AtButton onClick={() => error({ title: 'Error', description: 'error' })}>error</AtButton>
+      <AtButton onClick={() => confirm({ title: 'Confirm', description: 'confirm' })}>
+        confirm
+      </AtButton>
+      <AtButton onClick={() => warning({ title: 'Warning', description: 'warning' })}>
+        warning
+      </AtButton>
+      <AtButton onClick={() => info({ title: 'Info', description: 'info' })}>info</AtButton>
+    </div>
+  )
+}
+
+export const Api: StoryFn<typeof MlAlertDialog> = (args: MlAlertDialogProps) => {
+  return (
+    <MlAlertDialogProvider>
+      <ApiDemo />
+    </MlAlertDialogProvider>
+  )
+}

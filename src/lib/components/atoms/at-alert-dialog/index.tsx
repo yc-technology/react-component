@@ -9,6 +9,10 @@ import { AtButton } from '../at-button'
 type AtAlertDialogContextValue = {
   open: () => void
   close: () => void
+  cancelLoading: boolean
+  setCancelLoading: (loading: boolean) => void
+  actionLoading: boolean
+  setActionLoading: (loading: boolean) => void
 }
 const AtAlertDialogContext = React.createContext<AtAlertDialogContextValue>(
   {} as AtAlertDialogContextValue
@@ -28,6 +32,9 @@ export type AtAlertDialogProps = React.ComponentPropsWithoutRef<
 const AtAlertDialog = React.forwardRef<AtAlertDialogIns, AtAlertDialogProps>(
   ({ open: propsOpen, onOpenChange, onCloseAfter, onOpenAfter, ...props }, ref) => {
     const [innerOpen, setInnerOpen] = React.useState(false)
+    const [cancelLoading, setCancelLoading] = React.useState(false)
+    const [actionLoading, setActionLoading] = React.useState(false)
+
     const _onOpenChange = (open: boolean) => {
       if (!open) {
         sleep(150).then(() => {
@@ -45,14 +52,10 @@ const AtAlertDialog = React.forwardRef<AtAlertDialogIns, AtAlertDialogProps>(
       onOpenChange?.(open)
     }
 
-    React.useImperativeHandle(
-      ref,
-      () => ({
-        open: () => _onOpenChange(true),
-        close: () => _onOpenChange(false)
-      }),
-      [propsOpen]
-    )
+    React.useImperativeHandle(ref, () => ({
+      open: () => _onOpenChange(true),
+      close: () => _onOpenChange(false)
+    }))
 
     const open = React.useMemo(() => {
       if (typeof propsOpen !== 'undefined') {
@@ -64,9 +67,13 @@ const AtAlertDialog = React.forwardRef<AtAlertDialogIns, AtAlertDialogProps>(
     const contextValue = React.useMemo(() => {
       return {
         open: () => _onOpenChange(true),
-        close: () => _onOpenChange(false)
+        close: () => _onOpenChange(false),
+        cancelLoading,
+        setCancelLoading,
+        actionLoading,
+        setActionLoading
       }
-    }, [propsOpen])
+    }, [propsOpen, cancelLoading, actionLoading])
 
     return (
       <AtAlertDialogContext.Provider value={contextValue}>
@@ -86,7 +93,7 @@ const AtAlertDialogOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Overlay
     className={clsxm(
-      'fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+      'fixed inset-0 z-50 bg-black/60 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
       className
     )}
     {...props}
@@ -157,10 +164,18 @@ const AtAlertDialogAction = React.forwardRef<
   React.ElementRef<typeof AtButton>,
   React.ComponentPropsWithoutRef<typeof AtButton>
 >(({ className, onClick, ...props }, ref) => {
-  const { close } = React.useContext(AtAlertDialogContext)
+  const { close, cancelLoading, setActionLoading } = React.useContext(AtAlertDialogContext)
   const _onClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (cancelLoading) return
     if (onClick) {
-      await onClick(e)
+      try {
+        setActionLoading(true)
+        await onClick(e)
+      } catch (error) {
+        throw error
+      } finally {
+        setActionLoading(false)
+      }
     }
     close()
   }
@@ -173,10 +188,18 @@ const AtAlertDialogCancel = React.forwardRef<
   React.ElementRef<typeof AtButton>,
   React.ComponentPropsWithoutRef<typeof AtButton>
 >(({ className, onClick, ...props }, ref) => {
-  const { close } = React.useContext(AtAlertDialogContext)
+  const { close, actionLoading, setCancelLoading } = React.useContext(AtAlertDialogContext)
   const _onClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (actionLoading) return
     if (onClick) {
-      await onClick(e)
+      try {
+        setCancelLoading(true)
+        await onClick(e)
+      } catch (error) {
+        throw error
+      } finally {
+        setCancelLoading(false)
+      }
     }
     close()
   }

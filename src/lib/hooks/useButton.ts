@@ -11,7 +11,7 @@ export interface UseButtonOptions {
 export function useButton({
   loading: outerLoading,
   onClick,
-  autoSync,
+  autoSync = true,
   stopPropagation: stop,
   preventDefault: prevent
 }: UseButtonOptions) {

@@ -1,7 +1,7 @@
 {
   "name": "@yc-tech/react-component",
   "private": false,
-  "version": "0.1.68",
+  "version": "0.1.69",
   "packageManager": "pnpm@9.0.6",
   "author": "django",
   "repository": {

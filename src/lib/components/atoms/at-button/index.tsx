@@ -6,6 +6,7 @@ import { cva, VariantProps } from 'cva'
 import { useButton, UseButtonOptions } from '~/lib/hooks/useButton'
 import { AtSpinner } from '../at-spinner'
 import { AtTooltip, AtTooltipContent, AtTooltipTrigger } from '../at-tooltip'
+import { YcIcon } from '../yc-icon'
 
 const atButtonVariants = cva({
   base: 'bg-transparent inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
@@ -24,7 +25,7 @@ const atButtonVariants = cva({
       default: 'h-9 px-4 py-2 [&>.btn-icon]:w-4 [&>.btn-icon]:h-4',
       sm: 'h-8 rounded-md px-3 text-xs [&>.btn-icon]:w-3.5 [&>.btn-icon]:h-3.5',
       lg: 'h-10 rounded-md px-8 [&>.btn-icon]:w-4 [&>.btn-icon]:h-4',
-      icon: 'h-9 w-9'
+      icon: 'h-7 w-7 [&>.btn-icon]:w-4 [&>.btn-icon]:h-4'
     }
   },
   defaultVariants: {
@@ -82,9 +83,11 @@ const AtButton = React.forwardRef<HTMLButtonElement, AtButtonProps>(
         disabled={disabled || loading}
         {...props}>
         {loading ? (
-          <AtSpinner className="mr-2 btn-icon" />
+          <AtSpinner className={clsxm('btn-icon', children && 'mr-2')} />
+        ) : typeof icon === 'string' ? (
+          <YcIcon icon={icon} className={clsxm('btn-icon', children && 'mr-2')} />
         ) : (
-          <Slot className="mr-2 btn-icon">{icon}</Slot>
+          icon && <div className={clsxm('btn-icon', children && 'mr-2')}>{icon}</div>
         )}
         {children}
       </Comp>

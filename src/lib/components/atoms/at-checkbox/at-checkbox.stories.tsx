@@ -20,7 +20,7 @@ const Template: StoryFn<typeof AtCheckbox> = (args: AtCheckboxProps) => (
   <AtTooltipProvider>
     <div>
       <div className="flex items-center space-x-2">
-        <AtCheckboxGroup onValueChange={(e) => console.log(e)}>
+        <AtCheckboxGroup value={[]} onValueChange={(e) => console.log(e)}>
           <AtCheckbox value="1" label="Check Box 1" {...args} />
           <AtCheckbox value="2" label="Check Box 2" {...args} />
         </AtCheckboxGroup>

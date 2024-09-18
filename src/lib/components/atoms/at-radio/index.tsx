@@ -38,20 +38,20 @@ const AtRadio = React.forwardRef<React.ElementRef<typeof RadioGroupPrimitive.Ite
             <div className="w-full h-full rounded-full">
               <motion.div
                 variants={{
-                  initial: { scale: 0 },
-                  animate: { scale: 1 }
+                  initial: { scale: 0, opacity: 0 },
+                  animate: { scale: 1, opacity: 1 }
                 }}
                 initial="initial"
                 animate="animate"
                 className="h-full w-full bg-primary rounded-full flex items-center justify-center">
                 <motion.div
                   variants={{
-                    initial: { scale: 0 },
-                    animate: { scale: 1 }
+                    initial: { scale: 0, opacity: 0 },
+                    animate: { scale: 1, opacity: 1 }
                   }}
                   initial="initial"
                   animate="animate"
-                  className="h-1/2 w-1/2 bg-background rounded-full"></motion.div>
+                  className="h-2/5 w-2/5 bg-background rounded-full"></motion.div>
               </motion.div>
             </div>
           </RadioGroupPrimitive.Indicator>

@@ -53,8 +53,8 @@ export function YcIconButton({
         onClick={onClick}
         disabled={disabled || loading}
         className={clsxm(
-          'transition-all duration-300 text-opacity-60 hover:text-opacity-100 text-black hover:bg-neutral-200 rounded p-[2px] disabled:cursor-not-allowed',
-          showDefaultBgColor ? 'bg-neutral-100' : 'bg-transparent',
+          'transition-colors duration-300 text-opacity-60 hover:text-opacity-100 text-black hover:bg-icon-foreground rounded p-[2px] disabled:cursor-not-allowed',
+          showDefaultBgColor ? 'bg-icon' : 'bg-transparent',
           variants({ padding: size }),
           className
         )}>

@@ -23,7 +23,7 @@ type Story = StoryObj<typeof AtButton>
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: StoryFn<typeof AtButton> = (args: AtButtonProps) => (
   <AtTooltipProvider>
-    <AtButton {...args}> Button</AtButton>
+    <AtButton {...args}>{args.children}</AtButton>
   </AtTooltipProvider>
 )
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
@@ -37,13 +37,14 @@ const bind = (args: AtButtonProps) => {
 export const Primary = bind({
   variant: 'default',
   size: 'sm',
+  children: 'Button',
   onClick: () => alert('clicking primary')
 })
 
 export const PrimaryIcon = bind({
   variant: 'default',
-  size: 'sm',
-  icon: <UpdateIcon />,
+  size: 'icon',
+  icon: <UpdateIcon className="w-4 h-4" />,
   onClick: () => alert('clicking primary')
 })
 

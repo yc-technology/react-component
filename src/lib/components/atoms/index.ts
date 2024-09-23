@@ -40,6 +40,7 @@ export * from './at-dialog'
 export * from './at-alert-dialog'
 export * from './at-tabs'
 export * from './at-radio'
+export * from './at-datepicker'
 
 export * from 'antd'
 export * from './locales'

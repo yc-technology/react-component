@@ -39,6 +39,7 @@ export interface AtButtonProps
     VariantProps<typeof atButtonVariants> {
   asChild?: boolean
   icon?: React.ReactNode
+  iconClassName?: string
   loading?: boolean
   autoSync?: boolean
   stopPropagation?: boolean
@@ -50,6 +51,7 @@ const AtButton = React.forwardRef<HTMLButtonElement, AtButtonProps>(
   (
     {
       className,
+      iconClassName,
       variant,
       size,
       asChild = false,
@@ -83,11 +85,11 @@ const AtButton = React.forwardRef<HTMLButtonElement, AtButtonProps>(
         disabled={disabled || loading}
         {...props}>
         {loading ? (
-          <AtSpinner className={clsxm('btn-icon', children && 'mr-2')} />
+          <AtSpinner className={clsxm('btn-icon', children && 'mr-2', iconClassName)} />
         ) : typeof icon === 'string' ? (
-          <YcIcon icon={icon} className={clsxm('btn-icon', children && 'mr-2')} />
+          <YcIcon icon={icon} className={clsxm('btn-icon', children && 'mr-2', iconClassName)} />
         ) : (
-          icon && <div className={clsxm('btn-icon', children && 'mr-2')}>{icon}</div>
+          icon && <div className={clsxm('btn-icon', children && 'mr-2', iconClassName)}>{icon}</div>
         )}
         {children}
       </Comp>

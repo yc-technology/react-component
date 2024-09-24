@@ -1,6 +1,6 @@
 import { Meta, StoryFn, StoryObj } from '@storybook/react'
 import React from 'react'
-import { AtDatePickerPanel, AtDatePickerPanelProps } from '.'
+import { AtDatePicker, AtDatePickerPanel, AtDatePickerPanelProps, AtDatePickerProps } from '.'
 import { AtTooltipProvider } from '../at-tooltip'
 import moment, { Moment } from 'moment'
 
@@ -21,10 +21,22 @@ const Template: StoryFn<typeof AtDatePickerPanel> = (args: AtDatePickerPanelProp
     <AtDatePickerPanel {...args}></AtDatePickerPanel>
   </AtTooltipProvider>
 )
+
+const PickerTemplate: StoryFn<typeof AtDatePickerPanel> = (args: AtDatePickerProps) => (
+  <AtTooltipProvider>
+    <AtDatePicker {...args}></AtDatePicker>
+  </AtTooltipProvider>
+)
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
 const bind = (args: AtDatePickerPanelProps) => {
   const obj: Story = Template.bind({})
+  obj.args = args
+  return obj
+}
+
+const PickerBind = (args: AtDatePickerProps) => {
+  const obj: Story = PickerTemplate.bind({})
   obj.args = args
   return obj
 }
@@ -37,6 +49,17 @@ export const Default = bind({
     console.log(value)
   }
 })
+
+export const DefaultPicker = PickerBind({
+  range: true,
+  placeholder: '请选择日期',
+  clearable: true,
+  inputClassName: 'w-[280px]',
+  onValueChange(value) {
+    console.log(value)
+  }
+})
+
 export const Rang = bind({
   range: true,
   // value: [],

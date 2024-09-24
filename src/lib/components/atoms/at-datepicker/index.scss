@@ -98,8 +98,13 @@ $time-panel-padding-top: 0;
     }
   }
 
+  &-body {
+    width: 100%;
+  }
+
   // 内容面板
   &-content {
+    width: 100%;
     tr {
       &:not(:last-child) {
         > td {
@@ -348,6 +353,7 @@ $time-panel-padding-top: 0;
     width: auto;
 
     .#{$prefix-cls}-content {
+      width: 100%;
       position: relative;
       display: flex;
       max-height: 200px;

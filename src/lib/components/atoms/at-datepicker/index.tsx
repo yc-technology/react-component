@@ -1,24 +1,29 @@
-import { isArray } from 'lodash-es'
-import moment, { Moment } from 'moment'
-import { PickerPanel, PickerPanelProps, RangePicker } from 'rc-picker'
-import momentGenerateConfig from 'rc-picker/lib/generate/moment'
-import en_GB from 'rc-picker/lib/locale/en_GB'
-import React, { useCallback, useEffect, useMemo, useRef } from 'react'
-import './index.scss'
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
   ChevronLeftIcon,
   ChevronRightIcon
 } from '@radix-ui/react-icons'
+import { clsxm, nextTick } from '@yc-tech/shared'
+import { isArray } from 'lodash-es'
+import { Moment } from 'moment'
+import { PickerPanel, PickerPanelProps, RangePicker } from 'rc-picker'
+import momentGenerateConfig from 'rc-picker/lib/generate/moment'
+import en_GB from 'rc-picker/lib/locale/en_GB'
 import { PickerPanelRef } from 'rc-picker/lib/PickerPanel'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useControllableState } from '~/lib/hooks'
+import { AtButton } from '../at-button'
+import { AtPopover, AtPopoverContent, AtPopoverTrigger } from '../at-popover'
+import { YcInput } from '../yc-input'
+import './index.scss'
 
 export type AtDatePickerPanelProps = Omit<
   PickerPanelProps<Moment>,
   'generateConfig' | 'locale' | 'value' | 'defaultValue'
 > & {
   range?: boolean
+  panel?: boolean
   onValueChange?: (value?: Moment | Moment[]) => void
   onConfirm?: (value?: Moment | Moment[]) => void
   value?: Moment | Moment[]
@@ -28,6 +33,7 @@ export type AtDatePickerPanelProps = Omit<
 export function AtDatePickerPanel({
   value: outerValue,
   defaultValue,
+  panel,
   range,
   onValueChange,
   onConfirm,
@@ -37,8 +43,9 @@ export function AtDatePickerPanel({
   const [value, setValue] = useControllableState({
     prop: outerValue,
     onChange: onValueChange,
-    defaultProp: defaultValue ?? (range ? [] : moment())
+    defaultProp: defaultValue ?? (range ? [] : undefined)
   })
+  const [lastValue, setLastValue] = React.useState<Moment | Moment[] | undefined>(value)
   const isRange = range && isArray(value)
 
   const hoverRangeValue = useMemo(() => {
@@ -72,13 +79,6 @@ export function AtDatePickerPanel({
       onConfirm?.(value)
     }
   }
-
-  // useUpdateEffect(() => {
-  //   if (isRange && !confirm) {
-  //     return
-  //   }
-  //   setPickerValue(isArray(value) ? value?.[1] : value)
-  // }, [value])
 
   const onChange = (newValue: Moment | Moment[] | undefined, formatString?: string) => {
     console.log('Change:', newValue, formatString)
@@ -124,8 +124,6 @@ export function AtDatePickerPanel({
     return <ArrowLeftIcon className="w-4 h-4" />
   }, [])
 
-  useEffect(() => {}, [])
-
   return (
     <PickerPanel<Moment>
       hoverRangeValue={hoverRangeValue}
@@ -154,5 +152,105 @@ export function AtDateRangPicker() {
       <RangePicker<Moment> value={undefined} locale={en_GB} generateConfig={momentGenerateConfig} />
     </>
     // <RangePicker components={{input: }}/>
+  )
+}
+
+export type AtDatePickerProps = AtDatePickerPanelProps & {
+  placeholder?: string
+  className?: string
+  clearable?: boolean
+  inputClassName?: string
+}
+
+export function AtDatePicker({
+  placeholder,
+  value: valueProps,
+  onValueChange,
+  defaultValue,
+  clearable,
+  className,
+  format = 'YYYY-MM-DD',
+  onConfirm,
+  inputClassName,
+  ...props
+}: AtDatePickerProps) {
+  const [value, setValue] = useControllableState<Moment | Moment[]>({
+    prop: valueProps,
+    onChange: onValueChange,
+    defaultProp: defaultValue ?? (props.range ? [] : undefined)
+  })
+  const [show, setShow] = React.useState(false)
+  const [confirm, setConfirm] = React.useState(false)
+  const [lastValue, setLastValue] = React.useState<Moment | Moment[] | undefined>(value)
+
+  const _onConfirm = async (v?: Moment | Moment[]) => {
+    onConfirm?.(v)
+    setConfirm(true)
+    setLastValue(v)
+    await nextTick()
+    setShow(false)
+  }
+
+  const onClear = () => {
+    setValue?.(isArray(value) ? [] : undefined)
+    _onConfirm?.(isArray(value) ? [] : undefined)
+  }
+
+  // 确保在 range 模式下，点击确认后，再次点击输入框，否则显示上次的值
+  useEffect(() => {
+    if (props.range) {
+      if (!show && !confirm) {
+        setValue?.(lastValue)
+      }
+
+      if (show && confirm) {
+        setConfirm(false)
+      }
+    }
+  }, [props.range, show, confirm])
+
+  const valueFormat = useMemo(() => {
+    if (isArray(value)) {
+      return value.map((v) => v.format(format)).join(' ~ ') || undefined
+    }
+    return value?.format(format)
+  }, [value])
+
+  const hasValue = isArray(value) ? value.length > 0 : !!value
+
+  return (
+    <AtPopover open={show} onOpenChange={setShow}>
+      <AtPopoverTrigger asChild>
+        <YcInput
+          value={valueFormat ?? placeholder}
+          suffix={
+            clearable &&
+            hasValue && (
+              <AtButton
+                icon="mingcute:close-circle-line"
+                size="icon"
+                variant="icon"
+                tooltip="clear"
+                autoSync={false}
+                className="transition-opacity opacity-0 group-hover:opacity-100 bg-transparent w-6 h-6"
+                onClick={onClear}
+              />
+            )
+          }
+          className={clsxm('group', inputClassName)}
+          inputClassName={clsxm(!hasValue && 'text-muted-foreground', 'text-left')}
+        />
+      </AtPopoverTrigger>
+      <AtPopoverContent>
+        <div className={clsxm('[&>.rc-picker-panel]:p-0')}>
+          <AtDatePickerPanel
+            value={value}
+            onValueChange={setValue}
+            onConfirm={_onConfirm}
+            {...props}
+          />
+        </div>
+      </AtPopoverContent>
+    </AtPopover>
   )
 }

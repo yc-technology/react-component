@@ -55,9 +55,12 @@ export const DefaultPicker = PickerBind({
   placeholder: '请选择日期',
   clearable: true,
   inputClassName: 'w-[280px]',
-  onValueChange(value) {
+  onConfirm(value) {
     console.log(value)
   }
+  // onValueChange(value) {
+  //   console.log(value)
+  // }
 })
 
 export const Rang = bind({

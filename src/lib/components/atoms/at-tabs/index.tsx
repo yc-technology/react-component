@@ -5,7 +5,28 @@ import { clsxm, uuid_v4 } from '@yc-tech/shared'
 import * as React from 'react'
 import { useControllableState } from '../../../hooks/useControllableState'
 import { motion } from 'framer-motion'
+import { cva, VariantProps } from 'cva'
 
+const atTabsTriggerVariants = cva({
+  base: 'relative bg-transparent inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  variants: {
+    variant: {
+      primary:
+        '[&>.at-tabs-identifier]:data-[state=active]:bg-primary data-[state=active]:text-white'
+    }
+  }
+})
+
+const atTabsListVariants = cva({
+  base: 'inline-flex items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground font-medium',
+  variants: {
+    size: {
+      small: 'text-xs',
+      medium: 'text-sm',
+      large: 'text-lg'
+    }
+  }
+})
 type AtTabsContextValue = {
   id: string
   value?: string
@@ -48,33 +69,33 @@ const AtTabsList = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <TabsPrimitive.List
     ref={ref}
-    className={clsxm(
-      'inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground',
-      className
-    )}
+    className={clsxm(atTabsListVariants({ size: 'medium' }), className)}
     {...props}
   />
 ))
 AtTabsList.displayName = TabsPrimitive.List.displayName
 
+type AtTabsTriggerProps = React.ComponentProps<typeof TabsPrimitive.Trigger> & {
+  identifierClassName?: string
+} & VariantProps<typeof atTabsTriggerVariants>
 const AtTabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
->(({ className, children, ...props }, ref) => {
+  AtTabsTriggerProps
+>(({ className, children, identifierClassName, variant, ...props }, ref) => {
   const context = React.useContext(AtTabsContext)
   return (
     <TabsPrimitive.Trigger
       ref={ref}
-      className={clsxm(
-        'relative inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
-        className
-      )}
+      className={clsxm(atTabsTriggerVariants({ variant }), className)}
       {...props}>
       {context.value === props.value && (
         <motion.div
           layoutId={`tabs-${context.id}-select-bg`}
           data-state={context.value === props.value ? 'active' : 'inactive'}
-          className="z-[1] w-full rounded-md h-full absolute top-0 left-0 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow"></motion.div>
+          className={clsxm(
+            'at-tabs-identifier z-[1] w-full rounded-md h-full absolute top-0 left-0 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow',
+            identifierClassName
+          )}></motion.div>
       )}
       <div className="z-[2]">{children}</div>
     </TabsPrimitive.Trigger>

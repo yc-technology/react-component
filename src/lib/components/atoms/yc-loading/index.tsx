@@ -15,7 +15,7 @@ export function YcLoading(props: YcLoadingProps) {
     <div className={clsxm(className, 'relative')}>
       {((lazy && !loading) || !lazy) && children}
       {loading && (
-        <div className=" absolute top-0 left-0 bg-white/80 w-full h-full flex justify-center items-center">
+        <div className=" absolute top-0 left-0 w-full h-full flex justify-center items-center">
           <YcSpinner className=" m-auto h-6 w-6"></YcSpinner>
         </div>
       )}

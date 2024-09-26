@@ -23,8 +23,12 @@ const Template: StoryFn<typeof AtTabs> = (args: AtTabsProps) => {
     <AtTooltipProvider>
       <AtTabs defaultValue="account" onValueChange={(e) => console.info(e)} {...args}>
         <AtTabsList className="grid w-full grid-cols-2">
-          <AtTabsTrigger value="account">Account</AtTabsTrigger>
-          <AtTabsTrigger value="password">Password</AtTabsTrigger>
+          <AtTabsTrigger variant="primary" value="account">
+            Account
+          </AtTabsTrigger>
+          <AtTabsTrigger variant="primary" value="password">
+            Password
+          </AtTabsTrigger>
         </AtTabsList>
       </AtTabs>
     </AtTooltipProvider>

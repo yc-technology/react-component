@@ -11,6 +11,7 @@ type YcDotProps = {
   showZero?: boolean
   show?: boolean
   wrapperClassName?: string
+  containerClassName?: string
 } & React.HTMLAttributes<HTMLDivElement>
 export function YcDot({
   value,
@@ -21,11 +22,12 @@ export function YcDot({
   x,
   show,
   className,
-  wrapperClassName
+  wrapperClassName,
+  containerClassName
 }: YcDotProps) {
   if (show === false) return children
   return (
-    <div className={clsxm('relative')}>
+    <div className={clsxm('relative', containerClassName)}>
       {children}
       {(value || showZero || dot) && (
         <motion.div

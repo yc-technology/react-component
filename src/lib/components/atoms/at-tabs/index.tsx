@@ -25,6 +25,9 @@ const atTabsListVariants = cva({
       medium: 'text-sm',
       large: 'text-lg'
     }
+  },
+  defaultVariants: {
+    size: 'medium'
   }
 })
 type AtTabsContextValue = {
@@ -63,16 +66,18 @@ const AtTabs = React.forwardRef<React.ElementRef<typeof TabsPrimitive.Root>, AtT
   }
 )
 
-const AtTabsList = React.forwardRef<
-  React.ElementRef<typeof TabsPrimitive.List>,
-  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
->(({ className, ...props }, ref) => (
-  <TabsPrimitive.List
-    ref={ref}
-    className={clsxm(atTabsListVariants({ size: 'medium' }), className)}
-    {...props}
-  />
-))
+type AtTabsListProps = React.ComponentProps<typeof TabsPrimitive.List> &
+  VariantProps<typeof atTabsListVariants>
+
+const AtTabsList = React.forwardRef<React.ElementRef<typeof TabsPrimitive.List>, AtTabsListProps>(
+  ({ className, size, ...props }, ref) => (
+    <TabsPrimitive.List
+      ref={ref}
+      className={clsxm(atTabsListVariants({ size }), className)}
+      {...props}
+    />
+  )
+)
 AtTabsList.displayName = TabsPrimitive.List.displayName
 
 type AtTabsTriggerProps = React.ComponentProps<typeof TabsPrimitive.Trigger> & {

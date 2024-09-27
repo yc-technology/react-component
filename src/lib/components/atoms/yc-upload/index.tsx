@@ -24,37 +24,38 @@ export const YcUpload = forwardRef<UploadRef, YcUploadProps>(function Upload(pro
   const onUploadChange = (files: FileList) => {
     const fileList = Array.from(files)
     onChange?.(fileList)
+    // @ts-expect-error: 可以赋值
+    inputRef.current!.value = null
   }
 
   //   导出实例
-  useImperativeHandle(
-    ref,
-    () => {
-      return {
-        upload() {
-          inputRef.current?.click()
-        },
-        getInputElement() {
-          return inputRef.current
-        },
-        node: inputRef.current,
-      }
-    },
-    [],
-  )
+  useImperativeHandle(ref, () => {
+    return {
+      upload() {
+        inputRef.current?.click()
+      },
+      getInputElement() {
+        return inputRef.current
+      },
+      node: inputRef.current
+    }
+  }, [])
 
   return (
     <div className={className}>
       <div className="relative inline-block w-full h-full">
-        <div className=" absolute w-full h-full  cursor-pointer left-0 top-0" onClick={() => inputRef.current?.click()}>
+        <div
+          className=" absolute w-full h-full  cursor-pointer left-0 top-0"
+          onClick={() => inputRef.current?.click()}>
           <input
             ref={inputRef}
             className=" w-0 h-0 opacity-0"
             {...rest}
             type="file"
             accept={props.accept}
-            onChange={(e) => onUploadChange((e.target as HTMLInputElement | null)?.files as FileList)}
-          ></input>
+            onChange={(e) =>
+              onUploadChange((e.target as HTMLInputElement | null)?.files as FileList)
+            }></input>
         </div>
         {children}
       </div>

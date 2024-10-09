@@ -17,13 +17,28 @@ export type AtDraggableCardProps = {
   children: ReactNode
   initialPosition?: Position
   className?: string
+  titleClassName?: string
+  descriptionClassName?: string
+  contentClassName?: string
+  footerClassName?: string
   title?: ReactNode
   footer?: ReactNode
   description?: ReactNode
 }
 
 export function AtDraggableCard(props: AtDraggableCardProps) {
-  const { children, initialPosition, className, title, description, footer } = props
+  const {
+    children,
+    initialPosition,
+    className,
+    title,
+    description,
+    titleClassName,
+    descriptionClassName,
+    contentClassName,
+    footerClassName,
+    footer
+  } = props
 
   const target = useRef<HTMLDivElement>(null)
   const handle = useRef<HTMLDivElement>(null)
@@ -34,14 +49,16 @@ export function AtDraggableCard(props: AtDraggableCardProps) {
       <AtCardHeader
         ref={handle}
         className="cursor-move py-4 bg-transparent hover:bg-muted transition-colors border-b">
-        <AtCardTitle className="flex justify-between items-center ">
+        <AtCardTitle className={clsxm('flex justify-between items-center', titleClassName)}>
           {title}
           <YcIcon icon="mingcute:dots-line" className="w-5 h-5" />
         </AtCardTitle>
-        {description && <AtCardDescription>{description}</AtCardDescription>}
+        {description && (
+          <AtCardDescription className={descriptionClassName}>{description}</AtCardDescription>
+        )}
       </AtCardHeader>
-      <AtCardContent className="py-4">{children}</AtCardContent>
-      {footer && <AtCardFooter className="pb-4">{footer}</AtCardFooter>}
+      <AtCardContent className={clsxm('py-4', contentClassName)}>{children}</AtCardContent>
+      {footer && <AtCardFooter className={clsxm('pb-4', footerClassName)}>{footer}</AtCardFooter>}
       {/* {children} */}
     </AtCard>
   )

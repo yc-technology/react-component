@@ -42,6 +42,7 @@ export * from './at-radio'
 export * from './at-datepicker'
 export * from './at-progress'
 export * from './at-dot'
+export * from './at-card'
 
 export * from 'antd'
 export * from './locales'

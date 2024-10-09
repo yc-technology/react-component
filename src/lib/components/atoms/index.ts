@@ -44,6 +44,7 @@ export * from './at-progress'
 export * from './at-dot'
 export * from './at-draggable-card'
 export * from './at-scroll-area'
+export * from './at-spinner'
 
 export * from 'antd'
 export * from './locales'

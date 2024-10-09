@@ -43,6 +43,7 @@ export * from './at-datepicker'
 export * from './at-progress'
 export * from './at-dot'
 export * from './at-draggable-card'
+export * from './at-scroll-area'
 
 export * from 'antd'
 export * from './locales'

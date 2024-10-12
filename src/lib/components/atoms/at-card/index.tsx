@@ -1,10 +1,11 @@
 import { clsxm } from '@yc-tech/shared'
+import { HTMLMotionProps, motion } from 'framer-motion'
 import * as React from 'react'
 
-export type AtCardProps = React.HTMLAttributes<HTMLDivElement>
+export type AtCardProps = HTMLMotionProps<'div'>
 
 const AtCard = React.forwardRef<HTMLDivElement, AtCardProps>(({ className, ...props }, ref) => (
-  <div
+  <motion.div
     ref={ref}
     className={clsxm('rounded-md border bg-card text-card-foreground shadow', className)}
     {...props}
@@ -53,4 +54,4 @@ const AtCardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
 )
 AtCardFooter.displayName = 'AtCardFooter'
 
-export { AtCard, AtCardHeader, AtCardFooter, AtCardTitle, AtCardDescription, AtCardContent }
+export { AtCard, AtCardContent, AtCardDescription, AtCardFooter, AtCardHeader, AtCardTitle }

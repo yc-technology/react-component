@@ -8,6 +8,7 @@ import {
   AtCardDescription,
   AtCardFooter,
   AtCardHeader,
+  AtCardProps,
   AtCardTitle
 } from '../at-card'
 import { YcIcon } from '../yc-icon'
@@ -24,7 +25,7 @@ export type AtDraggableCardProps = {
   title?: ReactNode
   footer?: ReactNode
   description?: ReactNode
-}
+} & AtCardProps
 
 export function AtDraggableCard(props: AtDraggableCardProps) {
   const {
@@ -37,7 +38,8 @@ export function AtDraggableCard(props: AtDraggableCardProps) {
     descriptionClassName,
     contentClassName,
     footerClassName,
-    footer
+    footer,
+    ...rest
   } = props
 
   const target = useRef<HTMLDivElement>(null)
@@ -45,7 +47,11 @@ export function AtDraggableCard(props: AtDraggableCardProps) {
   const { style } = useDraggable(target, { handle, initialValue: initialPosition })
 
   return (
-    <AtCard ref={target} className={clsxm('absolute min-w-[300px]', className)} style={style}>
+    <AtCard
+      ref={target}
+      className={clsxm('absolute min-w-[300px]', className)}
+      style={style}
+      {...rest}>
       <AtCardHeader
         ref={handle}
         className="cursor-move py-4 bg-transparent hover:bg-muted transition-colors border-b">

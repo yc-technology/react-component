@@ -31,5 +31,13 @@ Default.args = {
   title: 'Xero',
   children: <AtButton>Button</AtButton>,
   // description: 'sdas',
-  footer: 'footer'
+  footer: 'footer',
+  initial: {
+    borderRadius: 100,
+    opacity: 0
+  },
+  animate: {
+    borderRadius: 8,
+    opacity: 1
+  }
 } as AtDraggableCardProps

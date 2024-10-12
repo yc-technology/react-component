@@ -64,6 +64,7 @@ export const Destructive = bind({
 
 export const Icon = bind({
   variant: 'icon',
+  size: 'icon',
   icon: <UpdateIcon />
 })
 

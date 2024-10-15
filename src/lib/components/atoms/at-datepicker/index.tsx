@@ -10,6 +10,7 @@ import { Moment } from 'moment'
 import { PickerPanel, PickerPanelProps, RangePicker } from 'rc-picker'
 import momentGenerateConfig from 'rc-picker/lib/generate/moment'
 import en_GB from 'rc-picker/lib/locale/en_GB'
+import zh_CN from 'rc-picker/lib/locale/zh_CN'
 import { PickerPanelRef } from 'rc-picker/lib/PickerPanel'
 import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useControllableState } from '~/lib/hooks'
@@ -17,6 +18,9 @@ import { AtButton } from '../at-button'
 import { AtPopover, AtPopoverContent, AtPopoverTrigger } from '../at-popover'
 import { YcInput } from '../yc-input'
 import './index.scss'
+
+export const DatePickerLocale_en_GB = en_GB
+export const DatePickerLocale_zh_CN = zh_CN
 
 export type AtDatePickerPanelProps = Omit<
   PickerPanelProps<Moment>,

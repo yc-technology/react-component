@@ -46,6 +46,3 @@ export * from './at-draggable-card'
 export * from './at-scroll-area'
 export * from './at-spinner'
 export * from './at-alert'
-
-export * from 'antd'
-export * from './locales'

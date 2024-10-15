@@ -78,7 +78,7 @@ $time-panel-padding-top: 0;
       background-color: transparent;
       transition: background-color 0.3s;
       &:hover {
-        @apply bg-muted;
+        background-color: hsl(var(--muted));
       }
     }
 
@@ -144,9 +144,11 @@ $time-panel-padding-top: 0;
       }
       // @apply gap-3;
       > tr {
-        @apply text-sm bg-muted;
+        background-color: hsl(var(--muted));
+        @apply text-sm;
         > th {
-          @apply py-2 bg-muted;
+          @apply py-2;
+          background-color: hsl(var(--muted));
 
           &:first-child {
             @apply rounded-l-md;
@@ -188,7 +190,7 @@ $time-panel-padding-top: 0;
         border 0.3s;
 
       &:hover {
-        @apply bg-muted;
+        background-color: hsl(var(--muted));
       }
     }
 
@@ -210,7 +212,8 @@ $time-panel-padding-top: 0;
 
     // 选择区间的背景颜色
     &-in-range > &-inner {
-      @apply bg-muted rounded-none;
+      @apply rounded-none;
+      background-color: hsl(var(--muted));
     }
 
     &-hover > &-inner {
@@ -250,7 +253,8 @@ $time-panel-padding-top: 0;
     &-range-end > &-inner,
     &-selected > &-inner {
       // 选中样式
-      @apply bg-primary text-white;
+      @apply text-white;
+      background-color: hsl(var(--primary));
     }
   }
 

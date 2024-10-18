@@ -38,7 +38,6 @@ export function MlMenu({
 }: MlMenuProps) {
   const uuid = useRef(uuid_v4())
   const onLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
     const target = e.currentTarget
     const value = target.getAttribute('data-value')
     if (value && onValueChange) {

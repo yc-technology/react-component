@@ -24,10 +24,18 @@ export interface MlMenuProps {
   value?: string
   onValueChange?: (value: string) => void
   labelClassName?: string
+  itemClassName?: string
   options?: MlMenuOptions[]
 }
 
-export function MlMenu({ options, value, isCollapsed, className, onValueChange }: MlMenuProps) {
+export function MlMenu({
+  options,
+  value,
+  isCollapsed,
+  className,
+  itemClassName,
+  onValueChange
+}: MlMenuProps) {
   const uuid = useRef(uuid_v4())
   const onLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
@@ -42,7 +50,7 @@ export function MlMenu({ options, value, isCollapsed, className, onValueChange }
     return (
       <motion.div
         layoutId={uuid.current}
-        className="absolute left-0 top-0 w-full h-full rounded-md bg-muted z-[-1]"></motion.div>
+        className="ml-menu-active-bg absolute left-0 top-0 w-full h-full rounded-md bg-primary/5 z-[-1]"></motion.div>
     )
   }
 
@@ -65,11 +73,13 @@ export function MlMenu({ options, value, isCollapsed, className, onValueChange }
                   to={item.to || '#'}
                   className={clsxm(
                     'h-9 w-9 flex items-center justify-center rounded-md text-muted-foreground relative',
-                    '[&[data-active=true]]:text-primary'
+                    '[&[data-active=true]]:text-primary',
+                    itemClassName,
+                    item.className
                   )}
                   onClick={onLinkClick}>
                   {item.value === value && renderActiveBg()}
-                  {!!item.icon && item.icon({ className: 'h-4 w-4' })}
+                  {!!item.icon && item.icon({ className: 'h-[18px] w-[18px]' })}
                   <span className="sr-only">{item.title}</span>
                 </Link>
               </AtTooltipTrigger>
@@ -90,13 +100,14 @@ export function MlMenu({ options, value, isCollapsed, className, onValueChange }
               data-label={item.label}
               data-active={item.value === value}
               className={clsxm(
-                'flex items-center text-sm justify-start py-2 px-3 rounded-md text-muted-foreground relative hover:text-primary',
+                'flex items-center justify-start py-2 px-3 rounded-md text-muted-foreground relative hover:text-primary text-sm',
                 '[&[data-active=true]]:text-primary',
+                itemClassName,
                 item.className
               )}
               onClick={onLinkClick}>
               {item.value === value && renderActiveBg()}
-              {!!item.icon && item.icon({ className: 'h-4 w-4 mr-2' })}
+              {!!item.icon && item.icon({ className: 'h-[18px] w-[18px] mr-3' })}
               {typeof item.title === 'string' ? (
                 <div className="flex-1">{item.title}</div>
               ) : (

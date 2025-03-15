@@ -17,9 +17,9 @@ export interface YcInfinityScrollProps {
   immediate?: boolean
   fetchFn?: FetchItemFn
   onFinishChange?: (finished: boolean) => void
-  renderItem?: (item: any, index: number) => JSX.Element
-  renderLoading?: () => JSX.Element
-  renderFinished?: () => JSX.Element
+  renderItem?: (item: any, index: number) => React.ReactElement
+  renderLoading?: () => React.ReactElement
+  renderFinished?: () => React.ReactElement
   finishedText?: string
   showEmpty?: boolean
   emptyText?: string

@@ -24,7 +24,7 @@ type MotionBodyProps = React.HTMLAttributes<HTMLTableSectionElement>
 const MotionBody: React.FC<MotionBodyProps> = ({ children, ...props }) => {
   const nodeList = toArray(children)
   // @ts-ignore
-  const nodesRef = React.useRef<Record<React.Key, React.ReactElement>>({})
+  const nodesRef = React.useRef<Record<React.Key, any>>({})
   // Better apply clean up logic to avoid OOM
   const keys: React.Key[] = []
   nodeList.forEach((node: any) => {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getClientHeight, getScrollHeight, getScrollTop } from 'ahooks/es/utils/rect'
 import { getTargetElement } from 'ahooks/es/utils/domTarget'
 import { useDebounceFn, useEventListener, useUpdateEffect } from 'ahooks'
@@ -8,7 +8,7 @@ import { usePaging } from './usePaging'
 import { Fn } from '~/types'
 
 interface UsePagingScrollOptions {
-  target?: React.RefObject<HTMLElement | Document>
+  target?: React.RefObject<HTMLElement | Document | undefined | null>
   threshold?: number
   reverse?: boolean
   immediate?: boolean
@@ -34,7 +34,6 @@ export function usePagingScroll<T>(fetchFn: FetchItemFn, options: UsePagingScrol
     { dataSource, setDataSource, fetchItemsFn: fetchFn },
     { reverse, pageSize, pageToken }
   )
-
   const [currentScrollTop, setCurrentScrollTop] = useState(0)
 
   const loadMore = async () => {

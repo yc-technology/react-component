@@ -13,7 +13,7 @@ export type AtUploadProps<T = any> = UploadProps<T> & {
   draggable?: boolean
   dragMainText?: string
   dragSubText?: string
-  draggerRender?: (fileList: any[]) => JSX.Element
+  draggerRender?: (fileList: any[]) => React.ReactElement
 }
 
 function AtUploadComp<T = any>(
@@ -64,4 +64,4 @@ function AtUploadComp<T = any>(
 
 export const AtUpload = forwardRef(AtUploadComp) as <T = any>(
   p: AtUploadProps<T> & { ref?: Ref<AtUploadIns> }
-) => JSX.Element
+) => React.ReactElement

@@ -18,7 +18,7 @@ export type AtCheckboxGroupProps = React.ComponentPropsWithoutRef<'div'> & {
   defaultValue?: string[]
   onValueChange?: (value: string[]) => void
 }
-export type AtCheckboxGroupIns = React.ElementRef<'div'>
+export type AtCheckboxGroupIns = React.ComponentRef<'div'>
 const AtCheckboxGroup = React.forwardRef<AtCheckboxGroupIns, AtCheckboxGroupProps>(
   ({ children, value: valueProps, defaultValue, onValueChange, ...props }, ref) => {
     const [value, setValue] = useControllableState<string[]>({
@@ -47,7 +47,7 @@ export type AtCheckboxProps = Omit<
   label?: string
   boxClassName?: string
 }
-export type AtCheckboxIns = React.ElementRef<typeof CheckboxPrimitive.Root>
+export type AtCheckboxIns = React.ComponentRef<typeof CheckboxPrimitive.Root>
 const AtCheckbox = React.forwardRef<AtCheckboxIns, AtCheckboxProps>(
   (
     {

@@ -19,7 +19,7 @@ export type AtSelectTriggerProps = React.ComponentPropsWithoutRef<
   suffixHoverHidden?: boolean
 }
 const AtSelectTrigger = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Trigger>,
+  React.ComponentRef<typeof SelectPrimitive.Trigger>,
   AtSelectTriggerProps
 >(({ className, children, suffix, suffixHoverHidden, ...props }, ref) => (
   <SelectPrimitive.Trigger
@@ -57,7 +57,7 @@ const AtSelectTrigger = React.forwardRef<
 AtSelectTrigger.displayName = SelectPrimitive.Trigger.displayName
 
 const AtSelectScrollUpButton = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.ScrollUpButton>,
+  React.ComponentRef<typeof SelectPrimitive.ScrollUpButton>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton>
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.ScrollUpButton
@@ -70,7 +70,7 @@ const AtSelectScrollUpButton = React.forwardRef<
 AtSelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName
 
 const AtSelectScrollDownButton = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.ScrollDownButton>,
+  React.ComponentRef<typeof SelectPrimitive.ScrollDownButton>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton>
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.ScrollDownButton
@@ -83,7 +83,7 @@ const AtSelectScrollDownButton = React.forwardRef<
 AtSelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName
 
 const AtSelectContent = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Content>,
+  React.ComponentRef<typeof SelectPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
 >(({ className, children, position = 'popper', ...props }, ref) => (
   <SelectPrimitive.Portal>
@@ -113,7 +113,7 @@ const AtSelectContent = React.forwardRef<
 AtSelectContent.displayName = SelectPrimitive.Content.displayName
 
 const AtSelectLabel = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Label>,
+  React.ComponentRef<typeof SelectPrimitive.Label>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.Label
@@ -129,7 +129,7 @@ export type AtSelectItemProps = React.ComponentPropsWithoutRef<typeof SelectPrim
   hoverSuffix?: (value: string) => React.ReactNode
 }
 const AtSelectItem = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Item>,
+  React.ComponentRef<typeof SelectPrimitive.Item>,
   AtSelectItemProps
 >(({ className, children, hoverSuffix, ...props }, ref) => (
   <div className="group flex flex-col items-center justify-center relative">
@@ -167,7 +167,7 @@ const AtSelectItem = React.forwardRef<
 AtSelectItem.displayName = SelectPrimitive.Item.displayName
 
 const AtSelectSeparator = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Separator>,
+  React.ComponentRef<typeof SelectPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.Separator
@@ -196,7 +196,7 @@ export type AtSelectProps = React.ComponentProps<typeof AtSelectRoot> & {
   prefix?: React.ReactNode
   itemHoverSuffix?: (value: string) => React.ReactNode
 }
-export type AtSelectIns = React.ElementRef<typeof AtSelectTrigger>
+export type AtSelectIns = React.ComponentRef<typeof AtSelectTrigger>
 
 const AtSelect = React.forwardRef<AtSelectIns, AtSelectProps>(
   (

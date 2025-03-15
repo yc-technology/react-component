@@ -38,7 +38,7 @@ type AtTabsContextValue = {
 const AtTabsContext = React.createContext<AtTabsContextValue>({} as AtTabsContextValue)
 
 export type AtTabsProps = React.ComponentProps<typeof TabsPrimitive.Root>
-const AtTabs = React.forwardRef<React.ElementRef<typeof TabsPrimitive.Root>, AtTabsProps>(
+const AtTabs = React.forwardRef<React.ComponentRef<typeof TabsPrimitive.Root>, AtTabsProps>(
   ({ className, value: valueProp, onValueChange, defaultValue, ...props }, ref) => {
     const id = React.useRef(uuid_v4())
     const [value, setValue] = useControllableState({
@@ -69,7 +69,7 @@ const AtTabs = React.forwardRef<React.ElementRef<typeof TabsPrimitive.Root>, AtT
 type AtTabsListProps = React.ComponentProps<typeof TabsPrimitive.List> &
   VariantProps<typeof atTabsListVariants>
 
-const AtTabsList = React.forwardRef<React.ElementRef<typeof TabsPrimitive.List>, AtTabsListProps>(
+const AtTabsList = React.forwardRef<React.ComponentRef<typeof TabsPrimitive.List>, AtTabsListProps>(
   ({ className, size, ...props }, ref) => (
     <TabsPrimitive.List
       ref={ref}
@@ -84,7 +84,7 @@ type AtTabsTriggerProps = React.ComponentProps<typeof TabsPrimitive.Trigger> & {
   identifierClassName?: string
 } & VariantProps<typeof atTabsTriggerVariants>
 const AtTabsTrigger = React.forwardRef<
-  React.ElementRef<typeof TabsPrimitive.Trigger>,
+  React.ComponentRef<typeof TabsPrimitive.Trigger>,
   AtTabsTriggerProps
 >(({ className, children, identifierClassName, variant, ...props }, ref) => {
   const context = React.useContext(AtTabsContext)
@@ -109,7 +109,7 @@ const AtTabsTrigger = React.forwardRef<
 AtTabsTrigger.displayName = TabsPrimitive.Trigger.displayName
 
 const AtTabsContent = React.forwardRef<
-  React.ElementRef<typeof TabsPrimitive.Content>,
+  React.ComponentRef<typeof TabsPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
 >(({ className, ...props }, ref) => (
   <TabsPrimitive.Content

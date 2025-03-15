@@ -5,7 +5,7 @@ import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 import { clsxm } from '@yc-tech/shared'
 
 const AtTooltipProvider = React.forwardRef<
-  React.ElementRef<typeof TooltipPrimitive.TooltipProvider>,
+  React.ComponentRef<typeof TooltipPrimitive.TooltipProvider>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.TooltipProvider>
 >(({ children, delayDuration = 200, ...rest }, ref) => {
   return (
@@ -20,7 +20,7 @@ const AtTooltip = TooltipPrimitive.Root
 const AtTooltipTrigger = TooltipPrimitive.Trigger
 
 const AtTooltipContent = React.forwardRef<
-  React.ElementRef<typeof TooltipPrimitive.Content>,
+  React.ComponentRef<typeof TooltipPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
 >(({ className, sideOffset = 4, ...props }, ref) => (
   <TooltipPrimitive.Content

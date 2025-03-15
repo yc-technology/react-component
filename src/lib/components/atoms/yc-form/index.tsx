@@ -79,7 +79,7 @@ const YcFormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
 YcFormItem.displayName = 'FormItem'
 
 const YcFormLabel = React.forwardRef<
-  React.ElementRef<typeof LabelPrimitive.Root>,
+  React.ComponentRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
 >(({ className, ...props }, ref) => {
   const { error, formItemId } = useFormField()
@@ -96,7 +96,7 @@ const YcFormLabel = React.forwardRef<
 YcFormLabel.displayName = 'FormLabel'
 
 const YcFormControl = React.forwardRef<
-  React.ElementRef<typeof Slot>,
+  React.ComponentRef<typeof Slot>,
   React.ComponentPropsWithoutRef<typeof Slot>
 >(({ ...props }, ref) => {
   const { error, formItemId, formDescriptionId, formMessageId } = useFormField()

@@ -88,7 +88,7 @@ const AtAlertDialogTrigger = AlertDialogPrimitive.Trigger
 const AtAlertDialogPortal = AlertDialogPrimitive.Portal
 
 const AtAlertDialogOverlay = React.forwardRef<
-  React.ElementRef<typeof AlertDialogPrimitive.Overlay>,
+  React.ComponentRef<typeof AlertDialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Overlay
@@ -103,7 +103,7 @@ const AtAlertDialogOverlay = React.forwardRef<
 AtAlertDialogOverlay.displayName = AlertDialogPrimitive.Overlay.displayName
 
 const AtAlertDialogContent = React.forwardRef<
-  React.ElementRef<typeof AlertDialogPrimitive.Content>,
+  React.ComponentRef<typeof AlertDialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>
 >(({ className, ...props }, ref) => (
   <AtAlertDialogPortal>
@@ -137,7 +137,7 @@ const AtAlertDialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLD
 AtAlertDialogFooter.displayName = 'AlertDialogFooter'
 
 const AtAlertDialogTitle = React.forwardRef<
-  React.ElementRef<typeof AlertDialogPrimitive.Title>,
+  React.ComponentRef<typeof AlertDialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Title
@@ -149,7 +149,7 @@ const AtAlertDialogTitle = React.forwardRef<
 AtAlertDialogTitle.displayName = AlertDialogPrimitive.Title.displayName
 
 const AtAlertDialogDescription = React.forwardRef<
-  React.ElementRef<typeof AlertDialogPrimitive.Description>,
+  React.ComponentRef<typeof AlertDialogPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Description>
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Description
@@ -161,7 +161,7 @@ const AtAlertDialogDescription = React.forwardRef<
 AtAlertDialogDescription.displayName = AlertDialogPrimitive.Description.displayName
 
 const AtAlertDialogAction = React.forwardRef<
-  React.ElementRef<typeof AtButton>,
+  React.ComponentRef<typeof AtButton>,
   React.ComponentPropsWithoutRef<typeof AtButton>
 >(({ className, onClick, ...props }, ref) => {
   const { close, cancelLoading, setActionLoading } = React.useContext(AtAlertDialogContext)
@@ -185,7 +185,7 @@ const AtAlertDialogAction = React.forwardRef<
 AtAlertDialogAction.displayName = AlertDialogPrimitive.Action.displayName
 
 const AtAlertDialogCancel = React.forwardRef<
-  React.ElementRef<typeof AtButton>,
+  React.ComponentRef<typeof AtButton>,
   React.ComponentPropsWithoutRef<typeof AtButton>
 >(({ className, onClick, ...props }, ref) => {
   const { close, actionLoading, setCancelLoading } = React.useContext(AtAlertDialogContext)

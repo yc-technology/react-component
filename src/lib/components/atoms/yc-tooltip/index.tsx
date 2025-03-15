@@ -7,7 +7,7 @@ import { createPortal } from 'react-dom'
 import { clsxm } from '@yc-tech/shared'
 
 const YcTooltipProvider = React.forwardRef<
-  React.ElementRef<typeof TooltipPrimitive.TooltipProvider>,
+  React.ComponentRef<typeof TooltipPrimitive.TooltipProvider>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.TooltipProvider>
 >(({ children, delayDuration = 100, ...rest }, ref) => {
   return (
@@ -18,7 +18,7 @@ const YcTooltipProvider = React.forwardRef<
 })
 
 const YcTooltip = React.forwardRef<
-  React.ElementRef<typeof TooltipPrimitive.Root>,
+  React.ComponentRef<typeof TooltipPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Root>
 >(({ children, delayDuration = 100, ...rest }, ref) => {
   return (
@@ -37,7 +37,7 @@ const YcTooltip = React.forwardRef<
  * ```
  */
 const YcToolTipButton = React.forwardRef<
-  React.ElementRef<typeof YcButton>,
+  React.ComponentRef<typeof YcButton>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Trigger>
 >(
   (
@@ -65,14 +65,14 @@ const YcToolTipButton = React.forwardRef<
 )
 
 const YcTooltipTrigger = React.forwardRef<
-  React.ElementRef<typeof TooltipPrimitive.Trigger>,
+  React.ComponentRef<typeof TooltipPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Trigger>
 >(({ ...rest }, ref) => {
   return <TooltipPrimitive.Trigger ref={ref} {...rest} />
 })
 
 const YcTooltipContent = React.forwardRef<
-  React.ElementRef<typeof TooltipPrimitive.Content>,
+  React.ComponentRef<typeof TooltipPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
 >(({ className, sideOffset = 4, ...props }, ref) => {
   if (typeof window !== 'undefined') {

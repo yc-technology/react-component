@@ -18,7 +18,7 @@ const AtDropdownMenuSub = DropdownMenuPrimitive.Sub
 const AtDropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup
 
 const AtDropdownMenuSubTrigger = React.forwardRef<
-  React.ElementRef<typeof DropdownMenuPrimitive.SubTrigger>,
+  React.ComponentRef<typeof DropdownMenuPrimitive.SubTrigger>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubTrigger> & {
     inset?: boolean
   }
@@ -38,7 +38,7 @@ const AtDropdownMenuSubTrigger = React.forwardRef<
 AtDropdownMenuSubTrigger.displayName = DropdownMenuPrimitive.SubTrigger.displayName
 
 const AtDropdownMenuSubContent = React.forwardRef<
-  React.ElementRef<typeof DropdownMenuPrimitive.SubContent>,
+  React.ComponentRef<typeof DropdownMenuPrimitive.SubContent>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubContent>
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.SubContent
@@ -53,7 +53,7 @@ const AtDropdownMenuSubContent = React.forwardRef<
 AtDropdownMenuSubContent.displayName = DropdownMenuPrimitive.SubContent.displayName
 
 const AtDropdownMenuContent = React.forwardRef<
-  React.ElementRef<typeof DropdownMenuPrimitive.Content>,
+  React.ComponentRef<typeof DropdownMenuPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>
 >(({ className, sideOffset = 4, ...props }, ref) => (
   <DropdownMenuPrimitive.Portal>
@@ -72,7 +72,7 @@ const AtDropdownMenuContent = React.forwardRef<
 AtDropdownMenuContent.displayName = DropdownMenuPrimitive.Content.displayName
 
 const AtDropdownMenuItem = React.forwardRef<
-  React.ElementRef<typeof DropdownMenuPrimitive.Item>,
+  React.ComponentRef<typeof DropdownMenuPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> & {
     inset?: boolean
   }
@@ -90,7 +90,7 @@ const AtDropdownMenuItem = React.forwardRef<
 AtDropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName
 
 const AtDropdownMenuCheckboxItem = React.forwardRef<
-  React.ElementRef<typeof DropdownMenuPrimitive.CheckboxItem>,
+  React.ComponentRef<typeof DropdownMenuPrimitive.CheckboxItem>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.CheckboxItem>
 >(({ className, children, checked, ...props }, ref) => (
   <DropdownMenuPrimitive.CheckboxItem
@@ -112,7 +112,7 @@ const AtDropdownMenuCheckboxItem = React.forwardRef<
 AtDropdownMenuCheckboxItem.displayName = DropdownMenuPrimitive.CheckboxItem.displayName
 
 const AtDropdownMenuRadioItem = React.forwardRef<
-  React.ElementRef<typeof DropdownMenuPrimitive.RadioItem>,
+  React.ComponentRef<typeof DropdownMenuPrimitive.RadioItem>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.RadioItem>
 >(({ className, children, ...props }, ref) => (
   <DropdownMenuPrimitive.RadioItem
@@ -133,7 +133,7 @@ const AtDropdownMenuRadioItem = React.forwardRef<
 AtDropdownMenuRadioItem.displayName = DropdownMenuPrimitive.RadioItem.displayName
 
 const AtDropdownMenuLabel = React.forwardRef<
-  React.ElementRef<typeof DropdownMenuPrimitive.Label>,
+  React.ComponentRef<typeof DropdownMenuPrimitive.Label>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Label> & {
     inset?: boolean
   }
@@ -147,7 +147,7 @@ const AtDropdownMenuLabel = React.forwardRef<
 AtDropdownMenuLabel.displayName = DropdownMenuPrimitive.Label.displayName
 
 const AtDropdownMenuSeparator = React.forwardRef<
-  React.ElementRef<typeof DropdownMenuPrimitive.Separator>,
+  React.ComponentRef<typeof DropdownMenuPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator>
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Separator
@@ -183,7 +183,7 @@ export type AtDropdownMenuCheckBoxesProps = React.ComponentProps<typeof AtDropdo
 }
 // 下拉多选
 const AtDropdownMenuCheckboxes = React.forwardRef<
-  React.ElementRef<typeof AtDropdownMenuRoot>,
+  React.ComponentRef<typeof AtDropdownMenuRoot>,
   AtDropdownMenuCheckBoxesProps
 >(
   (
@@ -254,7 +254,7 @@ export type AtDropdownMenuRadiosProps = React.ComponentProps<typeof AtDropdownMe
 }
 // 下拉单选
 const AtDropdownMenuRadios = React.forwardRef<
-  React.ElementRef<typeof AtDropdownMenuRoot>,
+  React.ComponentRef<typeof AtDropdownMenuRoot>,
   AtDropdownMenuRadiosProps
 >(
   (

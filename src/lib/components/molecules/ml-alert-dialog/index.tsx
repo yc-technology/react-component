@@ -11,7 +11,7 @@ import {
   AtAlertDialogTrigger
 } from '../../atoms/at-alert-dialog'
 
-export type MlAlertDialogIns = React.ElementRef<typeof AtAlertDialog>
+export type MlAlertDialogIns = React.ComponentRef<typeof AtAlertDialog>
 export type MlAlertDialogProps = React.ComponentPropsWithoutRef<typeof AtAlertDialog> & {
   onAction?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void | Promise<void>
   onCancel?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void | Promise<void>

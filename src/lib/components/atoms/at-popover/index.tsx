@@ -11,7 +11,7 @@ const AtPopoverTrigger = PopoverPrimitive.Trigger
 const AtPopoverAnchor = PopoverPrimitive.Anchor
 
 const AtPopoverContent = React.forwardRef<
-  React.ElementRef<typeof PopoverPrimitive.Content>,
+  React.ComponentRef<typeof PopoverPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
 >(({ className, align = 'center', sideOffset = 4, ...props }, ref) => (
   <PopoverPrimitive.Portal>

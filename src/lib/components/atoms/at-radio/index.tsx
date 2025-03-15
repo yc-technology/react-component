@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import * as React from 'react'
 import { AtLabel } from '../at-label'
 
-export type AtRadioGroupIns = React.ElementRef<typeof RadioGroupPrimitive.Root>
+export type AtRadioGroupIns = React.ComponentRef<typeof RadioGroupPrimitive.Root>
 export type AtRadioGroupProps = React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
 const AtRadioGroup = React.forwardRef<AtRadioGroupIns, AtRadioGroupProps>(
   ({ className, ...props }, ref) => {
@@ -21,7 +21,7 @@ type AtRadioProps = React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.It
   label?: string
   boxClassName?: string
 }
-const AtRadio = React.forwardRef<React.ElementRef<typeof RadioGroupPrimitive.Item>, AtRadioProps>(
+const AtRadio = React.forwardRef<React.ComponentRef<typeof RadioGroupPrimitive.Item>, AtRadioProps>(
   ({ className, boxClassName, children, label, ...props }, ref) => {
     const _id = React.useRef(uuid_v4())
     return (

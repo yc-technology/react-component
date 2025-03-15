@@ -14,7 +14,7 @@ import {
 import { YcIcon } from '../yc-icon'
 import { Position } from '~/types'
 
-export type AtDraggableCardProps = {
+export type AtDraggableCardProps = Omit<AtCardProps, 'title'> & {
   children: ReactNode
   initialPosition?: Position
   className?: string
@@ -25,7 +25,7 @@ export type AtDraggableCardProps = {
   title?: ReactNode
   footer?: ReactNode
   description?: ReactNode
-} & AtCardProps
+}
 
 export function AtDraggableCard(props: AtDraggableCardProps) {
   const {

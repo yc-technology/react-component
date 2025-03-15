@@ -28,7 +28,6 @@ const Template: StoryFn<typeof AtDraggableCard> = (args: AtDraggableCardProps) =
 export const Default = Template.bind({})
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Default.args = {
-  title: 'Xero',
   children: <AtButton>Button</AtButton>,
   // description: 'sdas',
   footer: 'footer',
@@ -36,6 +35,7 @@ Default.args = {
     borderRadius: 100,
     opacity: 0
   },
+  title: <div>title</div>,
   animate: {
     borderRadius: 8,
     opacity: 1
